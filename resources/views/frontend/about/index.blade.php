@@ -1,4 +1,5 @@
 @extends('frontend.layout.app')
+@section('title', $title ?? 'About Us | Memory Click')
 @section('content')
 <style>
     .mt-5 {

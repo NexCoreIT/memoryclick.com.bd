@@ -1,4 +1,5 @@
 @extends('frontend.layout.app')
+@section('title', $title ?? 'Home | Memory Click')
 @section('content')
     @php
         $seo = DB::table('custom_pages')->first();

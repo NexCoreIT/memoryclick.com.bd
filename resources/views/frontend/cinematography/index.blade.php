@@ -1,4 +1,6 @@
 @extends('frontend.layout.app')
+
+@section('title', $title ?? 'Cinematography | Memory Click')
 @section('content')
 
   <!-- breadcrump start -->

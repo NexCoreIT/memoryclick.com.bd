@@ -1,4 +1,5 @@
 @extends('frontend.layout.app')
+@section('title', $division->name ?? 'Packages | Memory Click')
 @php
     $about_details = DB::table('home_page_contents')->find(1);
 @endphp
@@ -45,7 +46,7 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <div class="col-lg-9 col-xl-10">
                     <!-- Tab Content Section -->
                     <div class="tab-content" id="v-pills-tabContent">

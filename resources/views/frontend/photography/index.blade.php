@@ -2,6 +2,7 @@
 @push('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
 @endpush
+@section('title', $title ?? 'Photography | Memory Click')
 @section('content')
     <!-- breadcrump start -->
     <div class="breadcrumb_sec bg-light py-4">

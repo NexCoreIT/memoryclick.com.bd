@@ -9,24 +9,31 @@
         <div class="d-flex justify-content-between align-items-center">
 
             <!-- Copyright -->
-            <p class="mb-0">&copy; {{ date('Y') }} <a class="text-primary" href="#">{{$links->footer_title ?? 'memorylick.com'}}</a>. All Rights Reserved.</p>
+            <p class="mb-0">&copy; {{ date('Y') }} <a class="text-primary"
+                    href="#">{{ $links->footer_title ?? 'memorylick.com' }}</a>. All Rights Reserved.</p>
 
             <!-- Social Media Links -->
             <div class="d-flex align-items-center">
-                <a class="btn btn-square btn-outline-primary rounded-circle me-2" href="{{ $links->facebook_link ?? '#' }}">
-    <i class="fab fa-facebook-f"></i>
-</a>
-<a class="btn btn-square btn-outline-primary rounded-circle me-2" href="{{ $links->youtube_link ?? '#' }}">
-    <i class="fab fa-youtube"></i>
-</a>
-<a class="btn btn-square btn-outline-primary rounded-circle me-2" href="{{ $links->instagram_link ?? '#' }}">
-    <i class="fab fa-instagram"></i>
-</a>
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2"
+                    href="{{ $links->facebook_link ?? '#' }}">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+               <a class="btn btn-square btn-outline-primary rounded-circle me-2"
+                href="{{ $links->youtube_link ? 'https://' . ltrim($links->youtube_link, '/') : '#' }}"
+                target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2"
+                    href="{{ $links->instagram_link ?? '#' }}">
+                    <i class="fab fa-instagram"></i>
+                </a>
 
             </div>
 
             <!-- Developer Credit -->
-            <p class="mb-0">Developed by <a class="text-primary" href="https://fastitcare.com.bd" target="_blank">Fast IT Care</a></p>
+            <p class="mb-0">Developed by <a class="text-primary" href="https://fastitcare.com.bd" target="_blank">Fast
+                    IT Care</a></p>
 
         </div>
     </div>

@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['title'] = 'Memoryclick - Home';
+        $data['title'] = 'Home | Memory Click';
         $data['testimonials'] = Testimonial::where('status', '1')->orderByDesc('id')->get();
         $data['service'] = OurService::where('status', '1')->orderBy('id', 'DESC')->get();
         $data['recent_work'] = Photography::where('status', '1')->latest()->take(4)->get();
@@ -104,7 +104,7 @@ class HomeController extends Controller
     public function topService()
     {
 
-        $data['title'] = "Top Services";
+        $data['title'] = "All Services";
 
         $data['service'] = OurService::where('status', '1')->orderBy('id', 'DESC')->get();
 
@@ -113,7 +113,7 @@ class HomeController extends Controller
 
     public function topServiceDetails($slug){
 
-        $data['title'] = "Top Services";
+        $data['title'] = "Service Details";
 
         $data['service'] = OurService::where('slug', $slug)->firstOrFail();
 

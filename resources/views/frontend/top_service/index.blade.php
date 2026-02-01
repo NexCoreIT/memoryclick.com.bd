@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-
+@section('title', $title ?? 'All Services | Memory Click')
 @section('content')
 
 

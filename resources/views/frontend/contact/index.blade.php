@@ -2,6 +2,7 @@
 @php
 $about_details = DB::table('home_page_contents')->find(1);
 @endphp
+@section('title', $title ?? 'Contact Us | Memory Click')
 @section('content')
  <!-- breadcrump start -->
  <div class="breadcrumb_sec bg-light py-4">

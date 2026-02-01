@@ -1,4 +1,5 @@
 @extends('frontend.layout.app')
+@section('title', $title ?? 'Packages | Memory Click')
 @php
     $about_details = DB::table('home_page_contents')->find(1);
 @endphp

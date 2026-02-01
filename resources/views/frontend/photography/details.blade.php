@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-
+@section('title', $row->title )
 @section('content')
 
 <!-- Hero Section Start -->

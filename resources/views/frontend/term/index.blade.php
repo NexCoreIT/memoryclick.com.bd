@@ -1,4 +1,5 @@
 @extends('frontend.layout.app')
+@section('title', $title ?? 'Terms and Condition | Memory Click')
 @section('content')
 
 
