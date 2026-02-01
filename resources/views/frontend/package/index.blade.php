@@ -19,10 +19,10 @@
     <!-- breadcrump end -->
 
     <!-- contact Start -->
-    <div class="section_gap">
+    <div class="">
         <div class="container">
             <!-- package start -->
-            <div class="package_sec section_gap">
+            <div class="package_sec section_gap d-flex align-items-center">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">

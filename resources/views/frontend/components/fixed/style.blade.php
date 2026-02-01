@@ -16,5 +16,5 @@
  <link href="{{asset('frontend/assets/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
  <link href="{{asset('frontend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
- <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
- <link href="{{asset('frontend/assets/css/responsive.css')}}" rel="stylesheet">
+ <link href="{{asset('frontend/assets/css/style.css')}}?v=2" rel="stylesheet">
+ <link href="{{asset('frontend/assets/css/responsive.css')}}?v=2" rel="stylesheet">
