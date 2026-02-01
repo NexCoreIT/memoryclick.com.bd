@@ -18,9 +18,9 @@
                     href="{{ $links->facebook_link ?? '#' }}">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-               <a class="btn btn-square btn-outline-primary rounded-circle me-2"
-                href="{{ $links->youtube_link ? 'https://' . ltrim($links->youtube_link, '/') : '#' }}"
-                target="_blank">
+
+                <a class="btn btn-square btn-outline-primary rounded-circle me-2"
+                    href="{{ $links->youtube_link ?? '#' }}">
                     <i class="fab fa-youtube"></i>
                 </a>
 
