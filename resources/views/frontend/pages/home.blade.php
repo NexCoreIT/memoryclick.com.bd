@@ -6,14 +6,13 @@
         $home_page_content = DB::table('home_page_contents')->first();
     @endphp
 @section('seo')
-    <title>{{ $title ?? 'memoryclick.net' }}</title>
     <meta name="description" content="{{ $seo->meta_description ?? 'Default website description for SEO' }}">
     <meta name="keywords"
         content="{{ $seo->meta_keywords ?? 'premium wedding photography and cinematography company based in Bangladesh' }}">
 
     <meta property="og:title" content="{{ $seo->meta_title ?? 'memoryclick.net' }}">
     <meta property="og:description" content="{{ $seo->meta_description ?? 'Default website description for SEO' }}">
-    <meta property="og:image" content="{{ $seo->meta_image ?? asset('frontend/images/default-image.jpg') }}">
+    <meta property="og:meta_image" content="{{ asset($meta_image->image ?? 'frontend/images/default-image.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta name="robots" content="index, follow">
 @endsection

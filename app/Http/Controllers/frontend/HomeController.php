@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Models\Cinematography;
 use App\Rules\PasswordCheckRule;
 use App\Http\Controllers\Controller;
+use App\Models\HomePageContent;
 use App\Models\Package;
 use App\Models\PackageCategory;
 
@@ -26,6 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        // Page title
+        $data['title'] = 'Home | Memory Click';
+
+        // Static SEO data
+        $data['seo'] = [
+            'meta_title'       => 'Home | Memory Click',
+            'meta_description' => 'Premium wedding photography and cinematography company based in Bangladesh',
+            'meta_keywords'    => 'wedding photography, cinematography, bridal shoot, memory click',
+        ];
+
+        $data['meta_image'] = HomePageContent::first();
+
+
         $data['title'] = 'Home | Memory Click';
         $data['testimonials'] = Testimonial::where('status', '1')->orderByDesc('id')->get();
         $data['service'] = OurService::where('status', '1')->orderBy('id', 'DESC')->get();
