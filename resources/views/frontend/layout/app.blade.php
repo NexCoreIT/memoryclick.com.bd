@@ -12,6 +12,10 @@ $home_page_content = DB::table('home_page_contents')->first();
     @yield('seo')
     <title>@yield('title', 'memoryclick.com.bd')</title>
 
+     <!-- Favicon -->
+    <link rel="icon" href="{{ asset('fav.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('fav.png') }}" type="image/x-icon">
+
     @include('frontend.components.fixed.style')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
