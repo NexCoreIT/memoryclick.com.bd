@@ -1,5 +1,8 @@
 @extends('frontend.layout.app')
 @section('title', $row->title )
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
+@endpush
 @section('content')
 
 <!-- Hero Section Start -->
@@ -47,3 +50,14 @@
 <!-- Gallery Section End -->
 
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.umd.min.js"></script>
+    <script>
+        lightGallery(document.getElementById('lightgallery'), {
+            selector: '.gallery-item',
+            thumbnail: true,
+            download: false
+        });
+    </script>
+
+@endpush
