@@ -31,7 +31,7 @@ class PhotographyController extends Controller
 {
     $request->validate([
         'title' => 'required|string|max:255',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        'image' => 'required|max:2048',
         'client_name' => 'required|string|max:255',
         'status' => 'required|boolean',
         'category_id' =>'required',
@@ -94,7 +94,7 @@ class PhotographyController extends Controller
 
     $request->validate([
         'title' => 'required|string|max:255',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        'image' => 'nullable|max:2048',
         'client_name' => 'required|string|max:255',
         'status' => 'required|boolean',
         'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
