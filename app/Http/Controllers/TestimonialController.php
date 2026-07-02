@@ -111,4 +111,18 @@ class TestimonialController extends Controller
 
         return redirect()->route('testimonial.index')->with('success', 'Testimonial updated successfully!');
     }
+
+    public function delete($id)
+    {
+        $testimonial = Testimonial::findOrFail($id);
+
+        // Delete image if exists
+        if ($testimonial->image && file_exists(public_path($testimonial->image))) {
+            unlink(public_path($testimonial->image));
+        }
+
+        $testimonial->delete();
+
+        return redirect()->route('testimonial.index')->with('success', 'Testimonial deleted successfully!');
+    }
 }

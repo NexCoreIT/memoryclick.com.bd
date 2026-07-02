@@ -285,7 +285,7 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
         Route::get('create', [TestimonialController::class, 'create'])->name('create');
         Route::post('store', [TestimonialController::class, 'store'])->name('store');
         Route::get('edit/{slug}', [TestimonialController::class, 'edit'])->name('edit');
-        Route::get('delete/{id}', [TestimonialController::class, 'delete'])->name('delete');
+        Route::delete('delete/{id}', [TestimonialController::class, 'delete'])->name('destroy');
         Route::put('update/{id}', [TestimonialController::class, 'update'])->name('update');
     });
 
