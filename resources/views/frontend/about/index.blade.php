@@ -29,11 +29,14 @@
     <!-- About Start -->
     <div class="about_sec section_gap bg-white" style="padding-top: 25px; padding-bottom: 25px;">
         <div class="container">
-            {{-- {!!$page->body!!} --}}
-            <div class="text-center">
-                <h2>{{ $page->title_1 ?? 'About CEO' }}</h2>
-                {{-- <p class="mb-0">This section will hold about us content dynamically.</p> --}}
-            </div>
+            @if($page)
+                {!! $page->body !!}
+            @else
+                <div class="text-center">
+                    <h2>About Memory Click</h2>
+                    <p class="mb-0">Content coming soon.</p>
+                </div>
+            @endif
         </div>
     </div>
     <!-- About End -->
@@ -45,17 +48,17 @@
                 <!-- Image Right -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-2">
                     <div class="about_bx text-center text-lg-end">
-                        <img src="{{ asset($page->ceo_image) }}" class="img-fluid rounded shape-md mt-5 mb-5"
+                        <img src="{{ $page && $page->ceo_image ? asset($page->ceo_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md mt-5 mb-5"
                             alt="">
                     </div>
                 </div>
                 <!-- Content Left -->
                 <div class="col-lg-6 order-lg-1">
                     <div>
-                        <p class="text-primary text-uppercase sub_title mb-2">{{ $page->ceo_designation ?? '' }}</p>
-                        <h1 class="title mb-4">{{ $page->ceo_name ?? '' }}</h1>
+                        <p class="text-primary text-uppercase sub_title mb-2">{{ optional($page)->ceo_designation ?? 'CEO' }}</p>
+                        <h1 class="title mb-4">{{ optional($page)->ceo_name ?? 'Founder & CEO' }}</h1>
                         <p class="mb-4 text-justify">
-                            {{ $page->body ?? '' }}
+                            {{ optional($page)->body ?? 'Details about the founder will be added here.' }}
                         </p>
 
                     </div>
@@ -69,8 +72,7 @@
     <div class="about_sec bg-white" style="padding-top: 25px; padding-bottom: 25px;">
         <div class="container">
             <div class="text-center">
-                <h2>{{ $page->title_2 ?? 'About MemoryClick' }}</h2>
-                {{-- <p class="mb-0">This section will hold about us content dynamically.</p> --}}
+                <h2>{{ optional($page)->title_2 ?? 'About MemoryClick' }}</h2>
             </div>
         </div>
     </div>
@@ -84,7 +86,7 @@
                 <!-- Image Left -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-1">
                     <div class="about_bx text-center text-lg-start">
-                        <img src="{{ asset($page->memoryclick_image) }}" class="img-fluid rounded shape-md mt-5"
+                        <img src="{{ $page && $page->memoryclick_image ? asset($page->memoryclick_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md mt-5"
                             alt="">
                     </div>
                 </div>
@@ -94,7 +96,7 @@
                         <p class="text-primary text-uppercase sub_title mb-2">Our Journey</p>
                         <h1 class="title mb-4">Memoryclick Story</h1>
                         <p class="mb-4 text-justify">
-                            {{ $page->about_memoryclick ?? '' }}
+                            {{ optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.' }}
                         </p>
 
                     </div>

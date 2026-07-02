@@ -6,7 +6,7 @@
 <nav class="navbar navbar-expand-lg bg-white border-bottom navbar-light sticky-top px-4 px-lg-5">
     <div class="container">
         <a href="{{ route('home') }}" class="navbar-brand">
-            <img src="{{ asset($logo->image) }}" alt="MemoryClick Logo" style="height: 45px;">
+            <img src="{{ $logo && $logo->image ? asset($logo->image) : asset('fav.png') }}" alt="MemoryClick Logo" style="height: 45px;">
         </a>
 
         <button type="button" class="navbar-toggler shadow-none p-2" data-bs-toggle="offcanvas"

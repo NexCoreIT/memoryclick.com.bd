@@ -50,9 +50,8 @@ class HomePageContentController extends Controller
 
             $image->move($uploadPath, $imageName);
 
-            // Directly update the logo
-            $content->image  = 'uploads/logo/' . $imageName;
-            // dd($content->logo);
+            $content->image = 'uploads/logo/' . $imageName;
+            $content->save();
         }
         $content->update([
             'homepage_title' => $request->homepage_title,

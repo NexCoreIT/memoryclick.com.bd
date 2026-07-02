@@ -20,7 +20,14 @@
   <!-- About Start -->
   <div class="about_sec section_gap">
     <div class="container">
-        {!!$page->body!!}
+        @if($page)
+            {!!$page->body!!}
+        @else
+            <div class="text-center">
+                <h2>Terms and Condition</h2>
+                <p class="mb-0">Content coming soon.</p>
+            </div>
+        @endif
     </div>
 </div>
 <!-- About End -->
