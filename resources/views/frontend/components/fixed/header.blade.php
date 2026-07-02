@@ -35,7 +35,7 @@
                 </div>
                 <a href="{{ route('package') }}" class="nav-item nav-link">Package</a>
                 <a href="{{ route('contactUs.page') }}" class="nav-item nav-link {{ request()->routeIs('contactUs.page') ? 'active' : '' }}">Contact Us</a>
-                <a href="{{ route('term.page') }}" class="nav-item nav-link {{ request()->routeIs('term.page') ? 'active' : '' }}">Term</a>
+                {{-- <a href="{{ route('term.page') }}" class="nav-item nav-link {{ request()->routeIs('term.page') ? 'active' : '' }}">Term</a> --}}
             </div>
         </div>
     </div>
