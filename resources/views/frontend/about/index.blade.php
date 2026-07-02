@@ -58,7 +58,7 @@
                         <p class="text-primary text-uppercase sub_title mb-2">{{ optional($page)->ceo_designation ?? 'CEO' }}</p>
                         <h1 class="title mb-4">{{ optional($page)->ceo_name ?? 'Founder & CEO' }}</h1>
                         <p class="mb-4 text-justify">
-                            {{ optional($page)->body ?? 'Details about the founder will be added here.' }}
+                            {{ optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.' }}
                         </p>
 
                     </div>

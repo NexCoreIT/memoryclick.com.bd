@@ -37,6 +37,90 @@
 
             <hr>
 
+            {{-- Section: Statistics / Counter --}}
+            <h4>Statistics Counter Section</h4>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Since Year</label>
+                        <input type="text" name="since_year" class="form-control" placeholder="e.g. 2014"
+                            value="{{ old('since_year', $item->since_year) }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Events Count</label>
+                        <input type="text" name="events_count" class="form-control" placeholder="e.g. 3000"
+                            value="{{ old('events_count', $item->events_count) }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Photos Count</label>
+                        <input type="text" name="photos_count" class="form-control" placeholder="e.g. 1000"
+                            value="{{ old('photos_count', $item->photos_count) }}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Clients Count</label>
+                        <input type="text" name="clients_count" class="form-control" placeholder="e.g. 999"
+                            value="{{ old('clients_count', $item->clients_count) }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            {{-- Section: Section Titles --}}
+            <h4>Section Titles</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Services Subtitle</label>
+                        <input type="text" name="service_subtitle" class="form-control" placeholder="e.g. Our Services"
+                            value="{{ old('service_subtitle', $item->service_subtitle) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Services Title</label>
+                        <input type="text" name="service_title" class="form-control" placeholder="e.g. Our Top Services"
+                            value="{{ old('service_title', $item->service_title) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Recent Work Subtitle</label>
+                        <input type="text" name="recent_work_subtitle" class="form-control" placeholder="e.g. Recent Work"
+                            value="{{ old('recent_work_subtitle', $item->recent_work_subtitle) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Recent Work Title</label>
+                        <input type="text" name="recent_work_title" class="form-control" placeholder="e.g. Our recent stunning wedding photography"
+                            value="{{ old('recent_work_title', $item->recent_work_title) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Cinematography Subtitle</label>
+                        <input type="text" name="cinematography_subtitle" class="form-control" placeholder="e.g. Cinematography"
+                            value="{{ old('cinematography_subtitle', $item->cinematography_subtitle) }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Cinematography Title</label>
+                        <input type="text" name="cinematography_title" class="form-control" placeholder="e.g. Take a peek at our recent stunning wedding photography"
+                            value="{{ old('cinematography_title', $item->cinematography_title) }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
             {{-- Section: About Info --}}
             <h4>About Section</h4>
             <div class="row">

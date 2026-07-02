@@ -26,15 +26,14 @@
                     <div class="col-6 mb-3">
                         <div class="count_items bg-light p-2 p-lg-5 rounded text-center">
                             <h5 class="text-dark fs-6">Since</h5>
-                            <h2 class="fs-1 fw-bold" data-toggle="counter-up">2014</h2>
+                            <h2 class="fs-1 fw-bold" data-toggle="counter-up">{{ $home_page_content->since_year ?? '2014' }}</h2>
                         </div>
                     </div>
                     <div class="col-6 mb-3">
                         <div class="count_items bg-light p-2 p-lg-5 rounded text-center">
                             <h5 class="text-dark fs-6">Events</h5>
                             <h2 class="fs-1 fw-bold">
-                                <span data-toggle="counter-up">3000</span> +
-
+                                <span data-toggle="counter-up">{{ $home_page_content->events_count ?? '3000' }}</span> +
                             </h2>
                         </div>
                     </div>
@@ -42,7 +41,7 @@
                         <div class="count_items bg-light p-2 p-lg-5 rounded text-center">
                             <h5 class="text-dark fs-6">Photos</h5>
                             <h2 class="fs-1 fw-bold">
-                                <span data-toggle="counter-up">1000</span> k+
+                                <span data-toggle="counter-up">{{ $home_page_content->photos_count ?? '1000' }}</span> k+
                             </h2>
                         </div>
                     </div>
@@ -50,7 +49,7 @@
                         <div class="count_items bg-light p-2 p-lg-5 rounded text-center">
                             <h5 class="text-dark fs-6">Clients</h5>
                             <h2 class="fs-1 fw-bold">
-                                <span data-toggle="counter-up">999</span> k+
+                                <span data-toggle="counter-up">{{ $home_page_content->clients_count ?? '999' }}</span> k+
                             </h2>
                         </div>
                     </div>
@@ -77,8 +76,8 @@
 <div class="service_sec pt-4 mt-4 pt-lg-4 mt-lg-4">
     <div class="container">
         <div class="text-center mx-auto mb-3">
-            <p class="text-primary text-uppercase sub_title mb-2">Our Services</p>
-            <h1 class="display-6 mb-5">Our Top Servies</h1>
+            <p class="text-primary text-uppercase sub_title mb-2">{{ $home_page_content->service_subtitle ?? 'Our Services' }}</p>
+            <h1 class="display-6 mb-5">{{ $home_page_content->service_title ?? 'Our Top Services' }}</h1>
         </div>
 
         <div class="owl-carousel service-carousel">
@@ -151,8 +150,8 @@
     <div class="recent_work_sec pb-5 pt-4 mt-4 pt-lg-4 mt-lg-4">
         <div class="container">
             <div class="text-center mx-auto mb-5 pb-4" style="max-width:600px;">
-                <p class="text-primary text-uppercase sub_title mb-2">Recent Work</p>
-                <h1 class="display-6 mb-0">Our recent stunning wedding photography</h1>
+                <p class="text-primary text-uppercase sub_title mb-2">{{ $home_page_content->recent_work_subtitle ?? 'Recent Work' }}</p>
+                <h1 class="display-6 mb-0">{{ $home_page_content->recent_work_title ?? 'Our recent stunning wedding photography' }}</h1>
             </div>
             <div class="row gy-2 gy-xl-5">
                 @forelse ($recent_work as $work)
@@ -195,8 +194,8 @@
     <div class="cinematography_sec pb-5 mb-4 pt-0 mt-0 pt-lg-4 mt-lg-4">
         <div class="container">
             <div class="text-center mx-auto mb-3" style="max-width: 600px;">
-                <p class="text-primary text-uppercase sub_title mb-2">Cinematography</p>
-                <h1 class="display-6 mb-5">Take a peek at our recent stunning wedding photography</h1>
+                <p class="text-primary text-uppercase sub_title mb-2">{{ $home_page_content->cinematography_subtitle ?? 'Cinematography' }}</p>
+                <h1 class="display-6 mb-5">{{ $home_page_content->cinematography_title ?? 'Take a peek at our recent stunning wedding photography' }}</h1>
             </div>
             <div class="owl-carousel cinematography-carousel">
 

@@ -36,7 +36,17 @@ class HomePageContentController extends Controller
             'footer_title' => 'required|string|max:255',
             'footer_btn' => 'nullable|string|max:255',
             'messenger_username' => 'nullable',
-            'phone' => 'nullable'
+            'phone' => 'nullable',
+            'since_year' => 'nullable|string|max:255',
+            'events_count' => 'nullable|string|max:255',
+            'photos_count' => 'nullable|string|max:255',
+            'clients_count' => 'nullable|string|max:255',
+            'service_subtitle' => 'nullable|string|max:255',
+            'service_title' => 'nullable|string|max:255',
+            'recent_work_subtitle' => 'nullable|string|max:255',
+            'recent_work_title' => 'nullable|string|max:255',
+            'cinematography_subtitle' => 'nullable|string|max:255',
+            'cinematography_title' => 'nullable|string|max:255',
         ]);
 
         $content = HomePageContent::find(1);
@@ -70,7 +80,17 @@ class HomePageContentController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             // 'messenger_username' => $request->messenger_username,
-            'phone' => $request->phone
+            'phone' => $request->phone,
+            'since_year' => $request->since_year,
+            'events_count' => $request->events_count,
+            'photos_count' => $request->photos_count,
+            'clients_count' => $request->clients_count,
+            'service_subtitle' => $request->service_subtitle,
+            'service_title' => $request->service_title,
+            'recent_work_subtitle' => $request->recent_work_subtitle,
+            'recent_work_title' => $request->recent_work_title,
+            'cinematography_subtitle' => $request->cinematography_subtitle,
+            'cinematography_title' => $request->cinematography_title,
             // 'status' => $request->status,
         ]);
 

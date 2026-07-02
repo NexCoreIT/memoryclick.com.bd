@@ -26,6 +26,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call(HomePageContentSeeder::class);
 
+        $this->call(DivisionSeeder::class);
+
+        $this->call(OurServiceSeeder::class);
+
+        $this->call(TestimonialSeeder::class);
+
+        $this->call(PhotographySeeder::class);
+
+        $this->call(CinematographySeeder::class);
 
     }
 }

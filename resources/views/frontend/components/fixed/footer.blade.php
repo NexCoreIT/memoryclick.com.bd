@@ -32,8 +32,7 @@
             </div>
 
             <!-- Developer Credit -->
-            <p class="mb-0">Developed by <a class="text-primary" href="https://fastitcare.com.bd" target="_blank">Fast
-                    IT Care</a></p>
+            <p class="mb-0"><a class="text-primary" href="https://fastitcare.com.bd" target="_blank"></a></p>
 
         </div>
     </div>
