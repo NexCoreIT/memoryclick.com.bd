@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class);
 
+        $this->call(PackageCategorySeeder::class);
+
         $this->call(HomePageContentSeeder::class);
 
         $this->call(DivisionSeeder::class);
