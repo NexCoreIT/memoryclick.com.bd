@@ -171,7 +171,7 @@
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
 
-                                {{-- <a class="dropdown-item {{ request()->routeIs('division.index') ? 'active' : '' }}"
+                                <a class="dropdown-item {{ request()->routeIs('division.index', 'division.create', 'division.edit') ? 'active' : '' }}"
                                     href="{{ route('division.index') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -183,7 +183,7 @@
                                         <path d="M15 8l4 4" />
                                     </svg>
                                     Division
-                                </a> --}}
+                                </a>
 
                                 <a class="dropdown-item {{ request()->routeIs('package.category.index') ? 'active' : '' }}"
                                     href="{{ route('package.category.index') }}">

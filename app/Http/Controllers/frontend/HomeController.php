@@ -29,11 +29,11 @@ class HomeController extends Controller
     {
 
         // Page title
-        $data['title'] = 'Home | Memory Click';
+        $data['title'] = 'Home';
 
         // Static SEO data
         $data['seo'] = [
-            'meta_title'       => 'Home | Memory Click',
+            'meta_title'       => 'Home',
             'meta_description' => 'Premium wedding photography and cinematography company based in Bangladesh',
             'meta_keywords'    => 'wedding photography, cinematography, bridal shoot, memory click',
         ];
@@ -41,7 +41,7 @@ class HomeController extends Controller
         $data['meta_image'] = HomePageContent::first();
 
 
-        $data['title'] = 'Home | Memory Click';
+        $data['title'] = 'Home';
         $data['testimonials'] = Testimonial::where('status', '1')->orderByDesc('id')->get();
         $data['service'] = OurService::where('status', '1')->orderBy('id', 'DESC')->get();
         $data['recent_work'] = Photography::where('status', '1')->latest()->take(4)->get();

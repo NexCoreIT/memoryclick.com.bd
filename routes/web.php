@@ -177,7 +177,7 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
         Route::get('index', [DivisionController::class, 'index'])->name('index');
         Route::get('create', [DivisionController::class, 'create'])->name('create');
         Route::post('save', [DivisionController::class, 'store'])->name('store');
-        Route::get('edit/{slug}', [DivisionController::class, 'edit'])->name('edit');
+        Route::get('edit/{id}', [DivisionController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [DivisionController::class, 'update'])->name('update');
         Route::get('delete/{id}', [DivisionController::class, 'delete'])->name('delete');
     });

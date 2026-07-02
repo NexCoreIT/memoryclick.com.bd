@@ -36,5 +36,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CinematographySeeder::class);
 
+        $this->call(PackageSeeder::class);
+
     }
 }
