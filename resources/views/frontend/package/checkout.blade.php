@@ -82,7 +82,7 @@
                             <div class="card-body p-4">
                                 <h4 class="mb-4">Order Summary</h4>
                                 <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                                    <img src="{{ asset($package->image) }}" alt="{{ $package->package_name }}" class="rounded" style="width: 80px; height: 60px; object-fit: cover;">
+                                    {{-- <img src="{{ asset($package->image) }}" alt="{{ $package->package_name }}" class="rounded" style="width: 80px; height: 60px; object-fit: cover;"> --}}
                                     <div class="ms-3">
                                         <h6 class="mb-1">{{ $package->package_name }}</h6>
                                         <p class="mb-0 text-muted small">
