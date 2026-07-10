@@ -241,6 +241,12 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
     // ===============================//
     // ROLE & PERMISSION MANAGEMENT   //
     // ===============================//
+    Route::prefix('order')->name('order.')->group(function () {
+        Route::get('index', [App\Http\Controllers\backend\OrderController::class, 'index'])->name('index');
+        Route::get('show/{id}', [App\Http\Controllers\backend\OrderController::class, 'show'])->name('show');
+        Route::delete('delete/{id}', [App\Http\Controllers\backend\OrderController::class, 'destroy'])->name('destroy');
+    });
+
     Route::get('/roles', [RolePermissionController::class, 'createRole'])->name('roles.permission.create');
     Route::get('/roles/permission/index', [RolePermissionController::class, 'index'])->name('roles.permission.index');
     Route::post('/roles/store', [RolePermissionController::class, 'storeRole'])->name('store.roles');
