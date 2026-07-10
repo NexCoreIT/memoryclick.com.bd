@@ -166,6 +166,13 @@ class HomeController extends Controller
         return view('frontend.package.package_details', compact('package'));
     }
 
+    public function checkout(Request $request)
+    {
+        $package = Package::with(['features', 'division', 'category'])->findOrFail($request->package_id);
+        $settings = HomePageContent::find(1);
+        return view('frontend.package.checkout', compact('package', 'settings'));
+    }
+
     public function term()
     {
         $data['title'] = 'Terms and Condition';

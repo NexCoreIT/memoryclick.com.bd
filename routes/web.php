@@ -31,6 +31,7 @@ use App\Http\Controllers\PackageCategoryController;
 use App\Http\Controllers\frontend\WebsiteServiceController;
 use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
+use App\Http\Controllers\SslCommerzPaymentController;
 
 // =================================
 //CACHE CLEARING ROUTE     //=====
@@ -66,7 +67,18 @@ Route::prefix('/')->group(function () {
 
     Route::get('division/{slug}/package', [FrontendHomeController::class, 'divisionPackage'])->name('division.package');
     Route::get('/package-details', [FrontendHomeController::class, 'packageDetails'])->name('package.details');
+    Route::get('/checkout', [FrontendHomeController::class, 'checkout'])->name('checkout');
     Route::get('frontend-logout', [FrontendAuthController::class, 'frontendLogout'])->name('frontend.logout');
+
+    // SSLCommerz Payment Routes
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax'])->name('pay.via.ajax');
+    Route::post('/success', [SslCommerzPaymentController::class, 'success'])->name('payment.success');
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail'])->name('payment.fail');
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel'])->name('payment.cancel');
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn'])->name('payment.ipn');
+    Route::get('/payment/success/{tran_id}', [SslCommerzPaymentController::class, 'paymentSuccessPage'])->name('payment.success.page');
+    Route::get('/payment/fail/{tran_id}', [SslCommerzPaymentController::class, 'paymentFailPage'])->name('payment.fail.page');
+    Route::get('/payment/cancel/{tran_id}', [SslCommerzPaymentController::class, 'paymentCancelPage'])->name('payment.cancel.page');
 
 
     // Service Routes

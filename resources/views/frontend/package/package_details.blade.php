@@ -40,8 +40,12 @@
     <div>
         <h4>{{ $package->price }} TK</h4>
     </div>
-    <div>
+    <div class="d-flex gap-2 align-items-center">
         <a href="https://wa.me/{{$settings->phone}}" class="btn btn-sm btn-dark" target="_blank">Contact with us</a>
+        <a href="{{ route('checkout', ['package_id' => $package->id]) }}" class="btn btn-sm btn-success d-flex align-items-center gap-1">
+            <img src="{{ asset('frontend/assets/img/sslcommerz.png') }}" alt="SSLCommerz" style="height: 20px; width: auto;">
+            Checkout
+        </a>
     </div>
 </div>
 
