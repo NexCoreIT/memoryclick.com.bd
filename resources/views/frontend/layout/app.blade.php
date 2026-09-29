@@ -5,7 +5,7 @@ $home_page_content = DB::table('home_page_contents')->first();
 @endphp
 <head>
     <meta charset="utf-8">
-    {{-- <title>Bridal - Photo Studio Website Template</title> --}}
+    {{-- <title>MemoryClick.com.bd - Photo Studio Website Template</title> --}}
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">

@@ -15,7 +15,7 @@ class PackageController extends Controller
     public function index()
     {
         $data['title']      = 'Packages List';
-        $data['packages']   = Package::paginate(20);
+        $data['packages']   = Package::with(['division', 'category'])->paginate(20);
         return view('backend.admin.package.index', $data);
     }
 

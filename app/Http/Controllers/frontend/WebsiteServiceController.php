@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class WebsiteServiceController extends Controller
 {
     public function index(){
-        $data['row'] = Product::where('status',1)->orderByDesc('id')->get();
+        $data['row'] = Product::with('category')->where('status', 1)->orderByDesc('id')->get();
         return view('frontend.service.index',$data);
     }
 
