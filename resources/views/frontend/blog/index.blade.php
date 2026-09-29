@@ -2,6 +2,19 @@
 
 @section('title', $title ?? 'Blog & Stories | Memory Click')
 
+@section('seo')
+    <meta name="description" content="Discover the latest event photography tips, wedding cinematography trends, and studio stories from MemoryClick Studio.">
+    <meta name="keywords" content="MemoryClick blog, photography tips, wedding photography, event videography, studio stories Bangladesh">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Blog & Stories | Memory Click">
+    <meta property="og:description" content="Discover the latest event photography tips, wedding cinematography trends, and studio stories from MemoryClick Studio.">
+    <meta property="og:image" content="{{ asset('fav.png') }}">
+@endsection
+
 @push('styles')
     <style>
         .blog_card {

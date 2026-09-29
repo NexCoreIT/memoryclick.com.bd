@@ -1,6 +1,71 @@
 @extends('frontend.layout.app')
 
-@section('title', $title ?? $post->title . ' | Memory Click')
+@php
+    $seoTitle = !empty($post->meta_title) ? $post->meta_title : ($post->title . ' | Memory Click');
+    $seoDescription = !empty($post->meta_description)
+        ? $post->meta_description
+        : Str::limit(strip_tags($post->short_description ?? $post->description), 160);
+    $seoKeywords = !empty($post->meta_keywords) ? $post->meta_keywords : 'memory click, blog, photography, event videography';
+    $seoImage = !empty($post->image) ? asset($post->image) : asset('fav.png');
+    $seoUrl = url()->current();
+@endphp
+
+@section('title', $seoTitle)
+
+@section('seo')
+    <meta name="description" content="{{ $seoDescription }}">
+    <meta name="keywords" content="{{ $seoKeywords }}">
+    <link rel="canonical" href="{{ $seoUrl }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ $seoUrl }}">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:image" content="{{ $seoImage }}">
+    <meta property="og:site_name" content="Memory Click">
+    <meta property="article:published_time" content="{{ $post->created_at ? $post->created_at->toIso8601String() : '' }}">
+    <meta property="article:modified_time" content="{{ $post->updated_at ? $post->updated_at->toIso8601String() : '' }}">
+    @if($post->category)
+        <meta property="article:section" content="{{ $post->category->name }}">
+    @endif
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $seoUrl }}">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    <meta name="twitter:image" content="{{ $seoImage }}">
+
+    <!-- Schema.org JSON-LD Structured Data for Google Ranking -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ $seoUrl }}"
+      },
+      "headline": "{{ addslashes($post->title) }}",
+      "description": "{{ addslashes($seoDescription) }}",
+      "image": "{{ $seoImage }}",
+      "author": {
+        "@type": "Organization",
+        "name": "{{ addslashes($post->author_name ?? 'MemoryClick Studio') }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Memory Click",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ asset('fav.png') }}"
+        }
+      },
+      "datePublished": "{{ $post->created_at ? $post->created_at->toIso8601String() : date('c') }}",
+      "dateModified": "{{ $post->updated_at ? $post->updated_at->toIso8601String() : date('c') }}"
+    }
+    </script>
+@endsection
 
 @push('styles')
     <style>
@@ -29,8 +94,10 @@
             font-family: "Playfair Display", serif;
             font-weight: 700;
             color: var(--dark, #1E1916);
-            font-size: clamp(1.5rem, 3.5vw, 2.3rem);
-            line-height: 1.3;
+            font-size: clamp(1.25rem, 4vw, 2.3rem);
+            line-height: 1.35;
+            word-break: break-word;
+            overflow-wrap: break-word;
         }
 
         .blog_lead_quote {

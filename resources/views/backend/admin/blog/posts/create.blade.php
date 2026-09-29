@@ -61,6 +61,33 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- SEO Settings Card -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-transparent border-bottom fw-bold py-3 text-primary d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            SEO Settings
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted">Meta Title</label>
+                                <input type="text" name="meta_title" class="form-control" placeholder="Meta title for Google (Defaults to Post Title if blank)" value="{{ old('meta_title') }}">
+                                <div class="form-text small text-muted">Recommended length: 50–60 characters.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted">Meta Description</label>
+                                <textarea name="meta_description" class="form-control" rows="3" placeholder="Meta description for search engines...">{{ old('meta_description') }}</textarea>
+                                <div class="form-text small text-muted">Recommended length: 150–160 characters.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted">Meta Keywords</label>
+                                <input type="text" name="meta_keywords" class="form-control" placeholder="e.g. photography, wedding, event, memory click" value="{{ old('meta_keywords') }}">
+                                <div class="form-text small text-muted">Separate keywords with commas.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-lg-4">

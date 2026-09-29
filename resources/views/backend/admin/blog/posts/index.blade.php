@@ -125,12 +125,12 @@
                         <tr>
                             <th width="5%">SN</th>
                             <th width="8%">Image</th>
-                            <th>Title</th>
+                            <th width="30%">Title</th>
                             <th>Category</th>
+                            <th class="text-center">Views</th>
                             <th class="text-center">Featured</th>
                             <th class="text-center">Status</th>
-                            <th>Created At</th>
-                            <th class="text-center" width="18%">Actions</th>
+                            <th class="text-center" width="22%">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -145,12 +145,25 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="fw-bold text-dark">{{ $post->title }}</div>
-                                    <div class="text-muted small">{{ Str::limit($post->short_description, 60) }}</div>
+                                    <div class="fw-bold text-dark text-wrap" style="max-width: 320px; word-break: break-word;">
+                                        <a href="{{ route('blog.details', $post->slug) }}" target="_blank" class="text-dark text-decoration-none" title="{{ $post->title }}">
+                                            {{ Str::limit($post->title, 50, '...') }}
+                                        </a>
+                                    </div>
+                                    @if($post->short_description)
+                                        <div class="text-muted small text-wrap mt-1" style="max-width: 320px; word-break: break-word;">
+                                            {{ Str::limit($post->short_description, 60, '...') }}
+                                        </div>
+                                    @endif
                                 </td>
                                 <td>
                                     <span class="badge bg-info text-white fw-bold px-2 py-1">
                                         {{ $post->category->name ?? 'Uncategorized' }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-light text-dark border fw-bold px-2 py-1">
+                                        <i class="fas fa-eye me-1 text-primary"></i> {{ number_format($post->views) }}
                                     </span>
                                 </td>
                                 <td class="text-center">
@@ -167,9 +180,11 @@
                                         <span class="badge bg-warning text-white fw-bold px-2 py-1">Pending</span>
                                     @endif
                                 </td>
-                                <td class="text-muted small">{{ $post->created_at ? $post->created_at->format('d M, Y') : 'N/A' }}</td>
                                 <td class="text-center">
-                                    <div class="d-flex justify-content-center gap-1">
+                                    <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                        <a href="{{ route('blog.details', $post->slug) }}" target="_blank" class="btn btn-sm btn-info text-white fw-bold" title="View Details">
+                                            View
+                                        </a>
                                         @if($post->status == 0)
                                             <a href="{{ route('blog.post.toggle-status', $post->id) }}" class="btn btn-sm btn-success text-white fw-bold px-2" title="Approve & Publish">
                                                 Approve
