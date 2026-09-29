@@ -9,10 +9,10 @@
 				<ul class="list-inline list-inline-dots mb-0">
 
 					<li class="list-inline-item">
-                        {{-- Developed by
-                        <a href="https://fastitcare.com.bd" target="_blank" class="link-secondary" rel="noopener">
+                        Developed by
+                        <a href="https://fastitcare.com.bd/" target="_blank" class="link-secondary" rel="noopener">
                            Fast IT Care
-                        </a> --}}
+                        </a>
                     </li>
 
 				</ul>

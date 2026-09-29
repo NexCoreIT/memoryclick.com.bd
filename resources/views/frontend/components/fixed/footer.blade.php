@@ -10,7 +10,7 @@
 
             <!-- Copyright -->
             <p class="mb-0">&copy; {{ date('Y') }} <a class="text-primary"
-                    href="#">{{ $links->footer_title ?? 'memorylick.com' }}</a>. All Rights Reserved.</p>
+                    href="#">MemoryClick.com.bd</a>. All Rights Reserved.</p>
 
             <!-- Social Media Links -->
             <div class="d-flex my-4 my-md-0 justify-content-center align-items-center">
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Developer Credit -->
-            <p class="mb-0"><a class="text-primary" href="https://fastitcare.com.bd" target="_blank"></a></p>
+            <p class="mb-0">Developed by <a class="text-primary" href="https://fastitcare.com.bd/" target="_blank">Fast IT Care</a></p>
 
         </div>
     </div>

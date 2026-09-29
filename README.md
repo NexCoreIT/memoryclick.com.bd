@@ -130,4 +130,4 @@ If you're working in a team or deploying to production, consider these additiona
 You should now have your Laravel project up and running. For more information on Laravel, visit the [official documentation](https://laravel.com/docs).
 
 Happy coding!!!!
-# Bridal.com
+# MemoryClick.com.bd
