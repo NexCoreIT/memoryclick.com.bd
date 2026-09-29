@@ -178,6 +178,50 @@
 
             <hr>
 
+            {{-- Section: SSLCommerz Payment Settings --}}
+            <h4 class="text-primary fw-bold">SSLCommerz Payment Gateway Settings</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">SSLCommerz Checkout Status</label>
+                        <select name="ssl_status" class="form-select">
+                            <option value="1" {{ old('ssl_status', $item->ssl_status ?? 1) == 1 ? 'selected' : '' }}>ON (Enable SSLCOMMERZ Checkout Button)</option>
+                            <option value="0" {{ old('ssl_status', $item->ssl_status ?? 1) == 0 ? 'selected' : '' }}>OFF (Hide SSLCOMMERZ Checkout Button)</option>
+                        </select>
+                        <small class="form-text text-muted">When OFF, the SSLCOMMERZ checkout button will be hidden on package detail modals.</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Environment Mode</label>
+                        <select name="ssl_sandbox" class="form-select">
+                            <option value="1" {{ old('ssl_sandbox', $item->ssl_sandbox ?? 1) == 1 ? 'selected' : '' }}>Sandbox / Test Mode</option>
+                            <option value="0" {{ old('ssl_sandbox', $item->ssl_sandbox ?? 1) == 0 ? 'selected' : '' }}>Live Mode</option>
+                        </select>
+                        <small class="form-text text-muted">Select Live Mode when using real merchant credentials.</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Store ID</label>
+                        <input type="text" name="ssl_store_id" class="form-control" placeholder="Enter Store ID (e.g. memoryclicklive)"
+                            value="{{ old('ssl_store_id', $item->ssl_store_id) }}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Store Password / Key</label>
+                        <input type="text" name="ssl_store_password" class="form-control" placeholder="Enter Store Password"
+                            value="{{ old('ssl_store_password', $item->ssl_store_password) }}">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
             {{-- Section: Contact Info --}}
             <h4>Contact Information</h4>
             <div class="row">

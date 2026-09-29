@@ -47,6 +47,10 @@ class HomePageContentController extends Controller
             'recent_work_title' => 'nullable|string|max:255',
             'cinematography_subtitle' => 'nullable|string|max:255',
             'cinematography_title' => 'nullable|string|max:255',
+            'ssl_status' => 'nullable|in:0,1',
+            'ssl_sandbox' => 'nullable|in:0,1',
+            'ssl_store_id' => 'nullable|string|max:255',
+            'ssl_store_password' => 'nullable|string|max:255',
         ]);
 
         $content = HomePageContent::find(1);
@@ -91,6 +95,10 @@ class HomePageContentController extends Controller
             'recent_work_title' => $request->recent_work_title,
             'cinematography_subtitle' => $request->cinematography_subtitle,
             'cinematography_title' => $request->cinematography_title,
+            'ssl_status' => $request->has('ssl_status') ? (int)$request->ssl_status : 0,
+            'ssl_sandbox' => $request->has('ssl_sandbox') ? (int)$request->ssl_sandbox : 0,
+            'ssl_store_id' => $request->ssl_store_id,
+            'ssl_store_password' => $request->ssl_store_password,
             // 'status' => $request->status,
         ]);
 

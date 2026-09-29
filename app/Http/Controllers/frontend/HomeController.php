@@ -170,6 +170,9 @@ class HomeController extends Controller
     {
         $package = Package::with(['features', 'division', 'category'])->findOrFail($request->package_id);
         $settings = HomePageContent::find(1);
+        if ($settings && isset($settings->ssl_status) && $settings->ssl_status == 0) {
+            return redirect()->route('package')->with('error', 'SSLCommerz payment gateway is currently disabled.');
+        }
         return view('frontend.package.checkout', compact('package', 'settings'));
     }
 
