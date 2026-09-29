@@ -26,7 +26,7 @@
                 </div>
                 <div class="mb-3 col-md-6">
                     <label class="form-label">Additional Images</label>
-                    <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" multiple required>
+                    <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" multiple>
                     @error('images')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -76,7 +76,7 @@
 
                     <div class="mb-3 col-md-6">
                         <label class="form-label">Category</label>
-                        <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                        <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ $photography->category_id == $category->id ? 'selected' : '' }}>

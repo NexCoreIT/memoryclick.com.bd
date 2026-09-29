@@ -97,8 +97,9 @@ class PhotographyController extends Controller
         'image' => 'nullable|max:2048',
         'client_name' => 'required|string|max:255',
         'status' => 'required|boolean',
+        'category_id' => 'required|exists:categories,id',
         'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        'package_name' =>'required'
+        'package_name' => 'required'
     ]);
 
     $uploadPath = public_path('uploads/photography');
