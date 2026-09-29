@@ -1,5 +1,23 @@
 @extends('backend.layout.app')
 
+@push('styles')
+    <style>
+        .nav-pills .nav-link {
+            color: #ffffff !important;
+            border-radius: 6px;
+            padding: 8px 16px;
+        }
+        .btn-primary,
+        .btn-success,
+        .btn-warning,
+        .btn-danger,
+        .btn-info,
+        .btn-secondary {
+            color: #ffffff !important;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-xl py-4">
         <div class="row g-2 align-items-center mb-3">
@@ -10,7 +28,7 @@
                 <div class="text-muted small mt-1">Manage and publish blog articles</div>
             </div>
             <div class="col-auto ms-auto">
-                <a href="{{ route('blog.post.create') }}" class="btn btn-primary d-inline-flex align-items-center">
+                <a href="{{ route('blog.post.create') }}" class="btn btn-primary text-white d-inline-flex align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-1"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                     Add Blog Post
                 </a>
@@ -59,8 +77,8 @@
                         </select>
                     </div>
                     <div class="col-md-2 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary w-100 fw-bold">Filter</button>
-                        <a href="{{ route('blog.post.index') }}" class="btn btn-outline-secondary" title="Reset">Reset</a>
+                        <button type="submit" class="btn btn-primary text-white w-100 fw-bold">Filter</button>
+                        <a href="{{ route('blog.post.index') }}" class="btn btn-secondary text-white" title="Reset">Reset</a>
                     </div>
                 </form>
             </div>
@@ -71,23 +89,23 @@
             <div class="card-body p-2">
                 <ul class="nav nav-pills">
                     <li class="nav-item me-2">
-                        <a class="nav-link {{ !request('status') || request('status') == 'all' ? 'active bg-primary text-white' : 'text-dark' }} fw-bold" href="{{ route('blog.post.index') }}">
-                            All Posts <span class="badge {{ !request('status') || request('status') == 'all' ? 'bg-white text-primary' : 'bg-secondary' }} ms-1">{{ $allCount }}</span>
+                        <a class="nav-link {{ !request('status') || request('status') == 'all' ? 'active bg-primary' : 'bg-secondary' }} text-white fw-bold" href="{{ route('blog.post.index') }}">
+                            All Posts <span class="badge {{ !request('status') || request('status') == 'all' ? 'bg-white text-primary' : 'bg-white text-dark' }} ms-1">{{ $allCount }}</span>
                         </a>
                     </li>
                     <li class="nav-item me-2">
-                        <a class="nav-link {{ request('status') == 'pending' ? 'active bg-warning text-dark' : 'text-dark' }} fw-bold" href="{{ route('blog.post.index', ['status' => 'pending']) }}">
+                        <a class="nav-link {{ request('status') == 'pending' ? 'active bg-warning' : 'bg-secondary' }} text-white fw-bold" href="{{ route('blog.post.index', ['status' => 'pending']) }}">
                             Pending
                             @if($pendingCount > 0)
                                 <span class="badge bg-danger text-white ms-1 fw-bold">{{ $pendingCount }}</span>
                             @else
-                                <span class="badge bg-secondary ms-1">0</span>
+                                <span class="badge bg-white text-dark ms-1">0</span>
                             @endif
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request('status') == 'published' ? 'active bg-success text-white' : 'text-dark' }} fw-bold" href="{{ route('blog.post.index', ['status' => 'published']) }}">
-                            Published <span class="badge {{ request('status') == 'published' ? 'bg-white text-success' : 'bg-success text-white' }} ms-1">{{ $publishedCount }}</span>
+                        <a class="nav-link {{ request('status') == 'published' ? 'active bg-success' : 'bg-secondary' }} text-white fw-bold" href="{{ route('blog.post.index', ['status' => 'published']) }}">
+                            Published <span class="badge {{ request('status') == 'published' ? 'bg-white text-success' : 'bg-white text-dark' }} ms-1">{{ $publishedCount }}</span>
                         </a>
                     </li>
                 </ul>
@@ -137,7 +155,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if($post->is_featured == 1)
-                                        <span class="badge bg-warning text-dark fw-bold px-2 py-1">Featured</span>
+                                        <span class="badge bg-warning text-white fw-bold px-2 py-1">Featured</span>
                                     @else
                                         <span class="badge bg-secondary text-white fw-bold px-2 py-1">Standard</span>
                                     @endif
@@ -146,26 +164,26 @@
                                     @if($post->status == 1)
                                         <span class="badge bg-success text-white fw-bold px-2 py-1">Published</span>
                                     @else
-                                        <span class="badge bg-warning text-dark fw-bold px-2 py-1">Pending</span>
+                                        <span class="badge bg-warning text-white fw-bold px-2 py-1">Pending</span>
                                     @endif
                                 </td>
                                 <td class="text-muted small">{{ $post->created_at ? $post->created_at->format('d M, Y') : 'N/A' }}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-1">
                                         @if($post->status == 0)
-                                            <a href="{{ route('blog.post.toggle-status', $post->id) }}" class="btn btn-sm btn-success fw-bold px-2" title="Approve & Publish">
+                                            <a href="{{ route('blog.post.toggle-status', $post->id) }}" class="btn btn-sm btn-success text-white fw-bold px-2" title="Approve & Publish">
                                                 Approve
                                             </a>
                                         @else
-                                            <a href="{{ route('blog.post.toggle-status', $post->id) }}" class="btn btn-sm btn-outline-secondary px-2" title="Unpublish">
+                                            <a href="{{ route('blog.post.toggle-status', $post->id) }}" class="btn btn-sm btn-secondary text-white px-2" title="Unpublish">
                                                 Unpublish
                                             </a>
                                         @endif
-                                        <a href="{{ route('blog.post.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        <a href="{{ route('blog.post.edit', $post->id) }}" class="btn btn-sm btn-warning text-white fw-bold">Edit</a>
                                         <form action="{{ route('blog.post.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger text-white fw-bold">Delete</button>
                                         </form>
                                     </div>
                                 </td>

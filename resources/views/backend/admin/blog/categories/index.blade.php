@@ -1,5 +1,18 @@
 @extends('backend.layout.app')
 
+@push('styles')
+    <style>
+        .btn-primary,
+        .btn-success,
+        .btn-warning,
+        .btn-danger,
+        .btn-info,
+        .btn-secondary {
+            color: #ffffff !important;
+        }
+    </style>
+@endpush
+
 @section('content')
     <div class="container-xl py-4">
         <div class="row g-2 align-items-center mb-3">
@@ -8,7 +21,7 @@
                 <div class="text-muted small mt-1">Manage blog post categories</div>
             </div>
             <div class="col-auto ms-auto">
-                <button type="button" class="btn btn-primary d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
+                <button type="button" class="btn btn-primary text-white d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#createCategoryModal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-1"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                     Add Category
                 </button>
@@ -37,8 +50,8 @@
                         <input type="text" name="search" class="form-control" placeholder="Search blog category by name..." value="{{ request('search') }}">
                     </div>
                     <div class="col-md-3 d-flex gap-2">
-                        <button type="submit" class="btn btn-primary w-100 fw-bold">Search</button>
-                        <a href="{{ route('blog.category.index') }}" class="btn btn-outline-secondary" title="Reset">Reset</a>
+                        <button type="submit" class="btn btn-primary text-white w-100 fw-bold">Search</button>
+                        <a href="{{ route('blog.category.index') }}" class="btn btn-secondary text-white" title="Reset">Reset</a>
                     </div>
                 </form>
             </div>
@@ -56,7 +69,6 @@
                         <tr>
                             <th width="5%">SN</th>
                             <th>Category Name</th>
-                            <th>Slug</th>
                             <th class="text-center">Posts Count</th>
                             <th class="text-center">Status</th>
                             <th class="text-center" width="15%">Actions</th>
@@ -69,9 +81,8 @@
                                 <td>
                                     <span class="fw-bold text-dark">{{ $category->name }}</span>
                                 </td>
-                                <td><code class="text-muted">{{ $category->slug }}</code></td>
                                 <td class="text-center">
-                                    <span class="badge bg-secondary-lt text-secondary fw-bold px-2 py-1">
+                                    <span class="badge bg-secondary text-white fw-bold px-2 py-1">
                                         {{ $category->posts_count }} Posts
                                     </span>
                                 </td>
@@ -84,7 +95,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center gap-2">
-                                        <button type="button" class="btn btn-warning btn-sm"
+                                        <button type="button" class="btn btn-warning text-white btn-sm fw-bold"
                                             data-bs-toggle="modal"
                                             data-bs-target="#editCategoryModal{{ $category->id }}"
                                             title="Edit Category">
@@ -93,7 +104,7 @@
                                         <form action="{{ route('blog.category.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this category?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            <button type="submit" class="btn btn-danger text-white btn-sm fw-bold">Delete</button>
                                         </form>
                                     </div>
                                 </td>
@@ -123,8 +134,8 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer border-top py-3">
-                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary fw-bold">Save Changes</button>
+                                                <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary text-white fw-bold">Save Changes</button>
                                             </div>
                                         </form>
                                     </div>
@@ -132,7 +143,7 @@
                             </div>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center py-4 text-muted">No categories found.</td>
+                                <td colspan="5" class="text-center py-4 text-muted">No categories found.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -171,8 +182,8 @@
                         </div>
                     </div>
                     <div class="modal-footer border-top py-3">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary fw-bold">Create Category</button>
+                        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary text-white fw-bold">Create Category</button>
                     </div>
                 </form>
             </div>
