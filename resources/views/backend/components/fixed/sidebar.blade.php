@@ -61,7 +61,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Slider
+                            Sliders
                         </span>
                     </a>
                 </li>
