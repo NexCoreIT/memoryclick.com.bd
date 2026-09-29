@@ -1,11 +1,16 @@
 @extends('backend.layout.app')
 
 @section('content')
-<div class="card col-12 d-flex justify-content-center mt-4">
-    <form action="{{ route('home.page.update') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="card-body">
-            <h3 class="card-title mb-4">Edit Page Content</h3>
+    <div class="container">
+        <br>
+        <h2 style="text-align: center">{{ $title }}</h2>
+        <br><br>
+        <div class="col-12">
+            <div class="card">
+                <form action="{{ route('home.page.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Edit Page Content</h3>
 
             {{-- Section: Homepage --}}
             <h4>Homepage Section</h4>
@@ -257,8 +262,10 @@
         <div class="card-footer text-end">
             <button type="submit" class="btn btn-primary">Update</button>
         </div>
-    </form>
-</div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('styles')
