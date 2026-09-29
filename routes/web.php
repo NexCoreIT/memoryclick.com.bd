@@ -29,6 +29,7 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\HomePageContentController;
 use App\Http\Controllers\PackageCategoryController;
 use App\Http\Controllers\frontend\WebsiteServiceController;
+use App\Http\Controllers\frontend\BlogController;
 use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\SslCommerzPaymentController;
@@ -85,6 +86,10 @@ Route::prefix('/')->group(function () {
     Route::get('/service/page', [WebsiteServiceController::class, 'index'])->name('service.page');
     Route::get('/service/details/{slug}', [WebsiteServiceController::class, 'details'])->name('service.details');
     Route::get('/cat-wise-service/{slug}', [WebsiteServiceController::class, 'CatWiseService'])->name('CatWiseService');
+
+    // Blog Routes
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/blog/{slug}', [BlogController::class, 'details'])->name('blog.details');
 });
 
 Route::prefix('user')->middleware('auth')->group(function () {
@@ -343,5 +348,25 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
         Route::get('edit/{slug}', [CinematographyController::class, 'edit'])->name('edit');
         Route::get('delete/{id}', [CinematographyController::class, 'delete'])->name('delete');
         Route::put('update/{id}', [CinematographyController::class, 'update'])->name('update');
+    });
+
+    // ===============================//
+    // BLOG MANAGEMENT                //
+    // ===============================//
+    Route::prefix('blog-category')->name('blog.category.')->group(function () {
+        Route::get('index', [\App\Http\Controllers\BlogCategoryController::class, 'index'])->name('index');
+        Route::post('store', [\App\Http\Controllers\BlogCategoryController::class, 'store'])->name('store');
+        Route::post('update/{id}', [\App\Http\Controllers\BlogCategoryController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [\App\Http\Controllers\BlogCategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('blog-post')->name('blog.post.')->group(function () {
+        Route::get('index', [\App\Http\Controllers\BlogPostController::class, 'index'])->name('index');
+        Route::get('create', [\App\Http\Controllers\BlogPostController::class, 'create'])->name('create');
+        Route::post('store', [\App\Http\Controllers\BlogPostController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [\App\Http\Controllers\BlogPostController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [\App\Http\Controllers\BlogPostController::class, 'update'])->name('update');
+        Route::get('toggle-status/{id}', [\App\Http\Controllers\BlogPostController::class, 'toggleStatus'])->name('toggle-status');
+        Route::delete('delete/{id}', [\App\Http\Controllers\BlogPostController::class, 'destroy'])->name('destroy');
     });
 });
