@@ -1,111 +1,99 @@
 @extends('frontend.layout.app')
 
-@section('title', $title ?? 'Blog & Stories — MemoryClick.com.bd')
+@section('title', $title ?? 'Blog & Stories | Memory Click')
 
 @push('styles')
     <style>
-        .blog-hero-section {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            padding: 60px 0 40px;
-            color: #ffffff;
-            position: relative;
-        }
-
-        .blog-card {
+        .blog_card {
             background: #ffffff;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        .blog-card:hover {
+        .blog_card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-            border-color: #3b82f6;
+            box-shadow: 0 10px 25px rgba(234, 166, 54, 0.2);
+            border-color: var(--primary, #EAA636);
         }
 
-        .blog-card-img-wrap {
+        .blog_card_img_wrap {
             position: relative;
             height: 220px;
             overflow: hidden;
-            background: #f3f4f6;
+            background: #fdf5eb;
         }
 
-        .blog-card-img {
+        .blog_card_img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .blog-card:hover .blog-card-img {
+        .blog_card:hover .blog_card_img {
             transform: scale(1.06);
         }
 
-        .blog-category-badge {
+        .blog_badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            background: #0284c7;
+            background: var(--primary, #EAA636);
             color: #ffffff;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             padding: 4px 12px;
-            border-radius: 50px;
+            border-radius: 4px;
             z-index: 2;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .blog-card-body {
+        .blog_card_body {
             padding: 20px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
-        .blog-meta-list {
+        .blog_meta {
+            font-size: 12px;
+            color: var(--secondary, #545454);
+            margin-bottom: 10px;
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
             gap: 12px;
-            font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 10px;
         }
 
-        .blog-card-title {
-            font-size: 18px;
+        .blog_card_title {
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
             font-weight: 700;
             line-height: 1.4;
             margin-bottom: 10px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
-        .blog-card-title a {
-            color: #111827;
+        .blog_card_title a {
+            color: var(--dark, #1E1916);
             text-decoration: none;
             transition: color 0.25s ease;
         }
 
-        .blog-card-title a:hover {
-            color: #2563eb;
+        .blog_card_title a:hover {
+            color: var(--primary, #EAA636);
         }
 
-        .blog-card-desc {
-            font-size: 13.5px;
-            color: #4b5563;
-            line-height: 1.55;
-            margin-bottom: 16px;
+        .blog_card_desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -113,78 +101,79 @@
             flex-grow: 1;
         }
 
-        .blog-card-footer {
-            border-top: 1px solid #f3f4f6;
-            padding-top: 12px;
-            margin-top: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .blog-read-more-link {
+        .blog_read_more {
+            font-weight: 600;
             font-size: 13px;
-            font-weight: 700;
-            color: #2563eb;
-            text-decoration: none;
+            color: var(--primary, #EAA636);
             text-transform: uppercase;
+            text-decoration: none;
             letter-spacing: 0.5px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.25s ease;
+            transition: gap 0.2s ease;
         }
 
-        .blog-read-more-link:hover {
-            color: #1d4ed8;
+        .blog_read_more:hover {
+            color: var(--dark, #1E1916);
             gap: 10px;
         }
 
-        .category-filter-btn {
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            padding: 6px 18px;
-            transition: all 0.2s ease;
+        .filter-button.active {
+            color: var(--primary, #EAA636) !important;
+            font-weight: 700 !important;
+            border-bottom: 2px solid var(--primary, #EAA636) !important;
         }
 
-        .category-filter-btn.active {
-            background-color: #2563eb;
-            color: #ffffff;
-            border-color: #2563eb;
+        @media (max-width: 575.98px) {
+            .blog_card_img_wrap {
+                height: 180px;
+            }
+            .blog_card_body {
+                padding: 15px;
+            }
+            .blog_card_title {
+                font-size: 16px;
+            }
         }
     </style>
 @endpush
 
 @section('content')
-    <!-- HERO SECTION -->
-    <section class="blog-hero-section text-center">
-        <div class="container py-4">
-            <h1 class="display-5 fw-bold mb-2">Our Blog & Stories</h1>
-            <p class="lead text-gray-300 mx-auto" style="max-width: 650px;">
-                Explore latest photography trends, wedding stories, videography tips, and behind-the-scenes insights from MemoryClick Studio.
-            </p>
+    <!-- breadcrumb start -->
+    <div class="breadcrumb_sec bg-light py-4">
+        <div class="container">
+            <h4>Blog & Stories</h4>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
         </div>
-    </section>
+    </div>
+    <!-- breadcrumb end -->
 
-    <!-- MAIN CONTENT SECTION -->
-    <section class="py-5 bg-light">
-        <div class="container py-2">
+    <!-- Blog Section Start -->
+    <div class="blog_sec section_gap py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-4" style="max-width:600px;">
+                <p class="text-primary text-uppercase sub_title mb-2">Our Blog</p>
+                <h1 class="display-6 mb-3">Explore Latest Photography & Cinematography Stories</h1>
+            </div>
 
-            <!-- FILTER BAR & SEARCH -->
-            <div class="row g-3 align-items-center mb-4">
-                <div class="col-lg-8">
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="{{ route('blog.index') }}" class="btn btn-outline-secondary category-filter-btn {{ empty($selectedCategory) || $selectedCategory === 'all' ? 'active' : '' }}">
-                            All Categories
+            <!-- Filter & Search Bar -->
+            <div class="row align-items-center justify-content-between mb-4 gy-3">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <a href="{{ route('blog.index') }}" class="btn btn-default shadow-none border-0 bg-transparent filter-button {{ empty($selectedCategory) || $selectedCategory === 'all' ? 'active' : '' }}">
+                        All
+                    </a>
+                    @foreach ($categories as $category)
+                        <a href="{{ route('blog.index', ['category' => $category->slug]) }}"
+                            class="btn btn-default shadow-none border-0 bg-transparent filter-button {{ $selectedCategory === $category->slug ? 'active' : '' }}">
+                            {{ $category->name }} ({{ $category->posts_count }})
                         </a>
-                        @foreach($categories as $cat)
-                            <a href="{{ route('blog.index', ['category' => $cat->slug]) }}"
-                               class="btn btn-outline-secondary category-filter-btn {{ $selectedCategory === $cat->slug ? 'active' : '' }}">
-                                {{ $cat->name }} ({{ $cat->posts_count }})
-                            </a>
-                        @endforeach
-                    </div>
+                    @endforeach
                 </div>
 
                 <div class="col-lg-4">
@@ -193,8 +182,8 @@
                             <input type="hidden" name="category" value="{{ $selectedCategory }}">
                         @endif
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control shadow-none" placeholder="Search blog articles..." value="{{ request('search') }}">
-                            <button class="btn btn-primary px-3" type="submit">
+                            <input type="text" name="search" class="form-control shadow-none rounded-start border" placeholder="Search articles..." value="{{ request('search') }}">
+                            <button class="btn btn-primary px-3 text-white" type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -202,46 +191,46 @@
                 </div>
             </div>
 
-            <!-- BLOG POSTS GRID -->
+            <!-- Blog Grid -->
             <div class="row g-4">
                 @forelse ($posts as $post)
-                    <div class="col-md-6 col-lg-4">
-                        <div class="blog-card">
-                            <div class="blog-card-img-wrap">
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="blog_card">
+                            <div class="blog_card_img_wrap">
                                 @if ($post->category)
-                                    <span class="blog-category-badge">
+                                    <span class="blog_badge">
                                         {{ $post->category->name }}
                                     </span>
                                 @endif
 
                                 <a href="{{ route('blog.details', $post->slug) }}" class="d-block w-100 h-100">
                                     @if (!empty($post->image) && file_exists(public_path($post->image)))
-                                        <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="blog-card-img" loading="lazy">
+                                        <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="blog_card_img" loading="lazy">
                                     @else
-                                        <img src="{{ asset('fav.png') }}" alt="{{ $post->title }}" class="blog-card-img p-4 bg-dark object-fit-contain" loading="lazy">
+                                        <img src="{{ asset('fav.png') }}" alt="{{ $post->title }}" class="blog_card_img p-4 bg-dark object-fit-contain" loading="lazy">
                                     @endif
                                 </a>
                             </div>
 
-                            <div class="blog-card-body">
-                                <div class="blog-meta-list">
+                            <div class="blog_card_body">
+                                <div class="blog_meta">
                                     <span><i class="far fa-user text-primary me-1"></i> {{ $post->author_name ?? 'MemoryClick' }}</span>
                                     <span><i class="far fa-calendar-alt text-primary me-1"></i> {{ $post->created_at ? $post->created_at->format('M d, Y') : 'N/A' }}</span>
                                     <span><i class="far fa-eye text-primary me-1"></i> {{ number_format($post->views) }}</span>
                                 </div>
 
-                                <h3 class="blog-card-title">
+                                <h3 class="blog_card_title">
                                     <a href="{{ route('blog.details', $post->slug) }}">
                                         {{ $post->title }}
                                     </a>
                                 </h3>
 
-                                <p class="blog-card-desc">
+                                <p class="blog_card_desc">
                                     {{ Str::limit(strip_tags($post->short_description ?? $post->description), 110) }}
                                 </p>
 
-                                <div class="blog-card-footer">
-                                    <a href="{{ route('blog.details', $post->slug) }}" class="blog-read-more-link">
+                                <div class="pt-2 border-top mt-auto">
+                                    <a href="{{ route('blog.details', $post->slug) }}" class="blog_read_more">
                                         Read Article <i class="fas fa-arrow-right ms-1"></i>
                                     </a>
                                 </div>
@@ -250,8 +239,8 @@
                     </div>
                 @empty
                     <div class="col-12 text-center py-5">
-                        <div class="bg-white p-5 rounded-4 shadow-sm border text-muted mx-auto" style="max-width: 500px;">
-                            <i class="fas fa-newspaper fa-3x text-secondary mb-3"></i>
+                        <div class="bg-light p-5 rounded shadow-sm border text-muted mx-auto" style="max-width: 500px;">
+                            <i class="fas fa-newspaper fa-3x text-primary mb-3"></i>
                             <h4 class="text-dark fw-bold mb-2">No Blog Posts Found</h4>
                             <p class="mb-0 small">There are currently no blog articles matching your criteria.</p>
                         </div>
@@ -266,5 +255,6 @@
                 </div>
             @endif
         </div>
-    </section>
+    </div>
+    <!-- Blog Section End -->
 @endsection
