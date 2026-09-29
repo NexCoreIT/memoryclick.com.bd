@@ -57,7 +57,7 @@ class HomeController extends Controller
 
         $data['categories'] = Category::where('status', '1')->get();
 
-        $data['rows'] = Photography::where('status', '1')->get();
+        $data['rows'] = Photography::with('category')->where('status', '1')->get();
 
         return view('frontend.photography.index', $data);
     }

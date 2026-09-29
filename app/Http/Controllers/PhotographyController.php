@@ -13,7 +13,7 @@ class PhotographyController extends Controller
 
         $data['title'] = "Photography List";
 
-        $data['photographies'] = Photography::paginate(20);
+        $data['photographies'] = Photography::with('category')->paginate(20);
 
         return view('backend.admin.photography.index',$data);
     }
