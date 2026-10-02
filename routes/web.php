@@ -33,6 +33,7 @@ use App\Http\Controllers\frontend\BlogController;
 use App\Http\Controllers\frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\SitemapController;
 
 // =================================
 //CACHE CLEARING ROUTE     //=====
@@ -90,6 +91,10 @@ Route::prefix('/')->group(function () {
     // Blog Routes
     Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
     Route::get('/blog/{slug}', [BlogController::class, 'details'])->name('blog.details');
+
+    // XML Sitemap Routes
+    Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+    Route::get('/sitemap', [SitemapController::class, 'index']);
 });
 
 Route::prefix('user')->middleware('auth')->group(function () {
