@@ -50,9 +50,13 @@ class BlogPostController extends Controller
 
     public function store(Request $request)
     {
+        $slug = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->title);
+        $request->merge(['slug' => $slug]);
+
         $request->validate([
             'category_id' => 'required|exists:blog_categories,id',
-            'title' => 'required|string|max:255|unique:blog_posts,title',
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:blog_posts,slug',
             'author_name' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
             'short_description' => 'nullable|string',
@@ -63,12 +67,14 @@ class BlogPostController extends Controller
             'views' => 'nullable|integer|min:0',
             'is_featured' => 'nullable|in:0,1',
             'status' => 'required|in:0,1',
+        ], [
+            'slug.unique' => 'This URL slug is already in use by another blog post. Please specify a unique slug.'
         ]);
 
         $imagePath = null;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '_' . $request->slug . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/blog'), $filename);
             $imagePath = 'uploads/blog/' . $filename;
         }
@@ -77,7 +83,7 @@ class BlogPostController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'author_name' => $request->author_name ?? 'MemoryClick Studio',
-            'slug' => Str::slug($request->title),
+            'slug' => $request->slug,
             'image' => $imagePath,
             'short_description' => $request->short_description,
             'description' => $request->description,
@@ -104,9 +110,13 @@ class BlogPostController extends Controller
     {
         $post = BlogPost::findOrFail($id);
 
+        $slug = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->title);
+        $request->merge(['slug' => $slug]);
+
         $request->validate([
             'category_id' => 'required|exists:blog_categories,id',
-            'title' => 'required|string|max:255|unique:blog_posts,title,' . $post->id,
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:blog_posts,slug,' . $post->id,
             'author_name' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
             'short_description' => 'nullable|string',
@@ -117,6 +127,8 @@ class BlogPostController extends Controller
             'views' => 'nullable|integer|min:0',
             'is_featured' => 'nullable|in:0,1',
             'status' => 'required|in:0,1',
+        ], [
+            'slug.unique' => 'This URL slug is already in use by another blog post. Please specify a unique slug.'
         ]);
 
         $imagePath = $post->image;
@@ -125,7 +137,7 @@ class BlogPostController extends Controller
                 File::delete(public_path($post->image));
             }
             $file = $request->file('image');
-            $filename = time() . '_' . Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '_' . $request->slug . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/blog'), $filename);
             $imagePath = 'uploads/blog/' . $filename;
         }
@@ -134,7 +146,7 @@ class BlogPostController extends Controller
             'category_id' => $request->category_id,
             'title' => $request->title,
             'author_name' => $request->author_name ?? $post->author_name ?? 'MemoryClick Studio',
-            'slug' => Str::slug($request->title),
+            'slug' => $request->slug,
             'image' => $imagePath,
             'short_description' => $request->short_description,
             'description' => $request->description,
