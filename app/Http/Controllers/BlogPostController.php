@@ -169,4 +169,27 @@ class BlogPostController extends Controller
         $statusText = $post->status == 1 ? 'Approved & Published' : 'Set to Pending';
         return redirect()->back()->with('success', "Blog post status updated to {$statusText}.");
     }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/blog_content'), $filename);
+
+            $url = asset('uploads/blog_content/' . $filename);
+
+            return response()->json([
+                'uploaded' => true,
+                'url' => $url
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => false,
+            'error' => [
+                'message' => 'Failed to upload image. Please select a valid image file.'
+            ]
+        ], 400);
+    }
 }

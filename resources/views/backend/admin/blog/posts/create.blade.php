@@ -145,9 +145,56 @@
 
 @push('scripts')
     <script>
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+                        data.append('_token', '{{ csrf_token() }}');
+
+                        fetch('{{ route("blog.post.upload-image") }}', {
+                            method: 'POST',
+                            body: data
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.url) {
+                                resolve({ default: result.url });
+                            } else if (result.uploaded && result.url) {
+                                resolve({ default: result.url });
+                            } else {
+                                reject(result.error ? result.error.message : 'Image upload failed.');
+                            }
+                        })
+                        .catch(error => {
+                            reject('Image upload failed: ' + error);
+                        });
+                    }));
+            }
+
+            abort() {
+            }
+        }
+
+        function MyCustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new MyUploadAdapter(loader);
+            };
+        }
+
         if (document.querySelector('#editor')) {
             ClassicEditor
-                .create(document.querySelector('#editor'))
+                .create(document.querySelector('#editor'), {
+                    extraPlugins: [MyCustomUploadAdapterPlugin],
+                    ckfinder: {
+                        uploadUrl: '{{ route("blog.post.upload-image") }}?_token={{ csrf_token() }}'
+                    }
+                })
                 .catch(error => {
                     console.error(error);
                 });

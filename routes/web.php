@@ -371,6 +371,7 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
         Route::post('store', [\App\Http\Controllers\BlogPostController::class, 'store'])->name('store');
         Route::get('edit/{id}', [\App\Http\Controllers\BlogPostController::class, 'edit'])->name('edit');
         Route::post('update/{id}', [\App\Http\Controllers\BlogPostController::class, 'update'])->name('update');
+        Route::post('upload-image', [\App\Http\Controllers\BlogPostController::class, 'uploadImage'])->name('upload-image');
         Route::get('toggle-status/{id}', [\App\Http\Controllers\BlogPostController::class, 'toggleStatus'])->name('toggle-status');
         Route::delete('delete/{id}', [\App\Http\Controllers\BlogPostController::class, 'destroy'])->name('destroy');
     });
