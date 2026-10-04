@@ -220,6 +220,100 @@
                 </div>
             </div>
 
+            <hr id="google-settings">
+
+            {{-- Section: Google Pixel, Analytics & Search Console Settings --}}
+            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                <h4 class="text-primary fw-bold mb-0 d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="me-2"><path d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"/><path d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"/><path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/></svg>
+                    Google Pixel, Analytics & Search Console Settings
+                </h4>
+                <span class="text-muted small"><span class="text-danger fw-bold">*</span> Indicates input field</span>
+            </div>
+
+            <div class="row g-3">
+                <!-- 1. Google Search Console Card -->
+                <div class="col-12">
+                    <div class="card shadow-none border">
+                        <div class="card-header bg-light py-2 px-3 fw-bold text-dark">
+                            1. Google Search Console Verification
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="mb-0">
+                                <label class="form-label fw-bold">Google Search Console Code / Verification Tag <span class="text-danger">*</span></label>
+                                <textarea name="google_search_console_code" class="form-control font-monospace small" rows="2" placeholder='e.g. <meta name="google-site-verification" content="YOUR_VERIFICATION_TOKEN" />'>{{ old('google_search_console_code', $item->google_search_console_code) }}</textarea>
+                                <div class="form-text text-muted small mt-1">Paste your Google Search Console meta tag or HTML verification snippet.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Google Analytics Card -->
+                <div class="col-12 col-lg-6">
+                    <div class="card shadow-none border h-100">
+                        <div class="card-header bg-light py-2 px-3 fw-bold text-dark">
+                            2. Google Analytics (GTAG / GTM)
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Google Analytics ID <span class="text-danger">*</span></label>
+                                <input type="text" name="google_analytics_id" class="form-control" placeholder="e.g. G-XXXXXXXXXX or UA-XXXXXXXX-X" value="{{ old('google_analytics_id', $item->google_analytics_id) }}">
+                                <div class="form-text text-muted small mt-1">Enter Measurement ID for auto GTAG script generation.</div>
+                            </div>
+                            <div class="mb-0">
+                                <label class="form-label fw-bold">Google Analytics Full Code</label>
+                                <textarea name="google_analytics_code" class="form-control font-monospace small" rows="3" placeholder="<script async src='https://www.googletagmanager.com/gtag/js?id=...'></script>...">{{ old('google_analytics_code', $item->google_analytics_code) }}</textarea>
+                                <div class="form-text text-muted small mt-1">Or paste your custom Google Analytics / Tag Manager script block here.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Google Pixel / Meta Pixel Card -->
+                <div class="col-12 col-lg-6">
+                    <div class="card shadow-none border h-100">
+                        <div class="card-header bg-light py-2 px-3 fw-bold text-dark">
+                            3. Google Pixel / Meta Pixel Tracking
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Google Pixel / Meta Pixel ID <span class="text-danger">*</span></label>
+                                <input type="text" name="google_pixel_id" class="form-control" placeholder="e.g. 123456789012345" value="{{ old('google_pixel_id', $item->google_pixel_id) }}">
+                                <div class="form-text text-muted small mt-1">Enter Pixel ID for dynamic event tracking.</div>
+                            </div>
+                            <div class="mb-0">
+                                <label class="form-label fw-bold">Google Pixel Full Code</label>
+                                <textarea name="google_pixel_code" class="form-control font-monospace small" rows="3" placeholder="<!-- Meta Pixel Code --> <script>...</script>">{{ old('google_pixel_code', $item->google_pixel_code) }}</textarea>
+                                <div class="form-text text-muted small mt-1">Or paste your full Google / Facebook Pixel tracking snippet.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Custom Scripts Injection Card -->
+                <div class="col-12">
+                    <div class="card shadow-none border">
+                        <div class="card-header bg-light py-2 px-3 fw-bold text-dark">
+                            4. Custom Tracking Scripts Injection
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label fw-bold">Custom Header Scripts (&lt;head&gt;)</label>
+                                    <textarea name="custom_head_code" class="form-control font-monospace small" rows="3" placeholder="Custom scripts injected into <head>">{{ old('custom_head_code', $item->custom_head_code) }}</textarea>
+                                    <div class="form-text text-muted small mt-1">Any additional tracking codes injected into the &lt;head&gt; tag.</div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label fw-bold">Custom Body Scripts (&lt;body&gt;)</label>
+                                    <textarea name="custom_body_code" class="form-control font-monospace small" rows="3" placeholder="Custom scripts injected immediately after <body> tag">{{ old('custom_body_code', $item->custom_body_code) }}</textarea>
+                                    <div class="form-text text-muted small mt-1">Additional noscript or body tracking scripts.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <hr>
 
             {{-- Section: Contact Info --}}
