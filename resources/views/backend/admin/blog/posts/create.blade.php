@@ -191,6 +191,7 @@
             ClassicEditor
                 .create(document.querySelector('#editor'), {
                     extraPlugins: [MyCustomUploadAdapterPlugin],
+                    removePlugins: ['MediaEmbed', 'Table', 'TableToolbar'],
                     ckfinder: {
                         uploadUrl: '{{ route("blog.post.upload-image") }}?_token={{ csrf_token() }}'
                     }
