@@ -47,7 +47,19 @@
                         <div class="card-body p-4">
                             <div class="mb-3">
                                 <label class="form-label fw-bold small text-muted">Post Title *</label>
-                                <input type="text" name="title" class="form-control" placeholder="Enter post title" value="{{ old('title') }}" required>
+                                <input type="text" name="title" id="titleInput" class="form-control" placeholder="Enter post title" value="{{ old('title') }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted">URL Slug <small class="text-muted">(Auto-generated from title if left empty)</small></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted small">{{ url('/blog') }}/</span>
+                                    <input type="text" name="slug" id="slugInput" class="form-control @error('slug') is-invalid @enderror" placeholder="e.g. my-custom-blog-slug" value="{{ old('slug') }}">
+                                </div>
+                                @error('slug')
+                                    <div class="text-danger small mt-1 fw-bold">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text small text-muted">Must be unique. Automatically converts spaces to hyphens and strips special characters.</div>
                             </div>
 
                             <div class="mb-3">
@@ -145,12 +157,81 @@
 
 @push('scripts')
     <script>
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+                        data.append('_token', '{{ csrf_token() }}');
+
+                        fetch('{{ route("blog.post.upload-image") }}', {
+                            method: 'POST',
+                            body: data
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.url) {
+                                resolve({ default: result.url });
+                            } else if (result.uploaded && result.url) {
+                                resolve({ default: result.url });
+                            } else {
+                                reject(result.error ? result.error.message : 'Image upload failed.');
+                            }
+                        })
+                        .catch(error => {
+                            reject('Image upload failed: ' + error);
+                        });
+                    }));
+            }
+
+            abort() {
+            }
+        }
+
+        function MyCustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new MyUploadAdapter(loader);
+            };
+        }
+
         if (document.querySelector('#editor')) {
             ClassicEditor
-                .create(document.querySelector('#editor'))
+                .create(document.querySelector('#editor'), {
+                    extraPlugins: [MyCustomUploadAdapterPlugin],
+                    removePlugins: ['MediaEmbed', 'Table', 'TableToolbar'],
+                    ckfinder: {
+                        uploadUrl: '{{ route("blog.post.upload-image") }}?_token={{ csrf_token() }}'
+                    }
+                })
                 .catch(error => {
                     console.error(error);
                 });
+        }
+
+        const titleInput = document.querySelector('#titleInput');
+        const slugInput = document.querySelector('#slugInput');
+        let userTouchedSlug = false;
+
+        if (slugInput) {
+            slugInput.addEventListener('input', function() {
+                userTouchedSlug = true;
+            });
+        }
+
+        if (titleInput && slugInput) {
+            titleInput.addEventListener('input', function() {
+                if (!userTouchedSlug && (!slugInput.value || slugInput.value.trim() === '')) {
+                    slugInput.value = this.value.toLowerCase()
+                        .trim()
+                        .replace(/[\s\W-]+/g, '-')
+                        .replace(/^-+|-+$/g, '');
+                }
+            });
         }
     </script>
 @endpush

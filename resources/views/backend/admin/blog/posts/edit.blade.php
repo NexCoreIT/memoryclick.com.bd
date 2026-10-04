@@ -47,7 +47,19 @@
                         <div class="card-body p-4">
                             <div class="mb-3">
                                 <label class="form-label fw-bold small text-muted">Post Title *</label>
-                                <input type="text" name="title" class="form-control" placeholder="Enter post title" value="{{ old('title', $post->title) }}" required>
+                                <input type="text" name="title" id="titleInput" class="form-control" placeholder="Enter post title" value="{{ old('title', $post->title) }}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-muted">URL Slug *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted small">{{ url('/blog') }}/</span>
+                                    <input type="text" name="slug" id="slugInput" class="form-control @error('slug') is-invalid @enderror" placeholder="custom-post-url-slug" value="{{ old('slug', $post->slug) }}" required>
+                                </div>
+                                @error('slug')
+                                    <div class="text-danger small mt-1 fw-bold">{{ $message }}</div>
+                                @enderror
+                                <div class="form-text small text-muted">Must be unique. Automatically converts spaces to hyphens and strips special characters.</div>
                             </div>
 
                             <div class="mb-3">
@@ -79,7 +91,7 @@
                                     <div class="text-truncate text-primary fw-semibold fs-5 mb-1" id="seoPreviewTitle">
                                         {{ $post->meta_title ?: $post->title }}
                                     </div>
-                                    <div class="text-success small text-truncate mb-1">
+                                    <div class="text-success small text-truncate mb-1" id="seoPreviewUrl">
                                         {{ url('/blog/' . $post->slug) }}
                                     </div>
                                     <div class="text-muted small" id="seoPreviewDesc" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
@@ -174,21 +186,80 @@
 
 @push('scripts')
     <script>
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+                        data.append('_token', '{{ csrf_token() }}');
+
+                        fetch('{{ route("blog.post.upload-image") }}', {
+                            method: 'POST',
+                            body: data
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.url) {
+                                resolve({ default: result.url });
+                            } else if (result.uploaded && result.url) {
+                                resolve({ default: result.url });
+                            } else {
+                                reject(result.error ? result.error.message : 'Image upload failed.');
+                            }
+                        })
+                        .catch(error => {
+                            reject('Image upload failed: ' + error);
+                        });
+                    }));
+            }
+
+            abort() {
+            }
+        }
+
+        function MyCustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new MyUploadAdapter(loader);
+            };
+        }
+
         if (document.querySelector('#editor')) {
             ClassicEditor
-                .create(document.querySelector('#editor'))
+                .create(document.querySelector('#editor'), {
+                    extraPlugins: [MyCustomUploadAdapterPlugin],
+                    removePlugins: ['MediaEmbed', 'Table', 'TableToolbar'],
+                    ckfinder: {
+                        uploadUrl: '{{ route("blog.post.upload-image") }}?_token={{ csrf_token() }}'
+                    }
+                })
                 .catch(error => {
                     console.error(error);
                 });
         }
 
         const titleInput = document.querySelector('input[name="title"]');
+        const slugInput = document.getElementById('slugInput');
+        const seoPreviewUrl = document.getElementById('seoPreviewUrl');
         const metaTitleInput = document.getElementById('metaTitleInput');
         const seoPreviewTitle = document.getElementById('seoPreviewTitle');
 
         const shortDescInput = document.querySelector('textarea[name="short_description"]');
         const metaDescInput = document.getElementById('metaDescInput');
         const seoPreviewDesc = document.getElementById('seoPreviewDesc');
+
+        const baseUrl = '{{ url("/blog") }}/';
+
+        if (slugInput && seoPreviewUrl) {
+            slugInput.addEventListener('input', function() {
+                const cleanedSlug = this.value.toLowerCase().trim().replace(/[\s\W-]+/g, '-').replace(/^-+|-+$/g, '');
+                seoPreviewUrl.textContent = baseUrl + (cleanedSlug || 'post-slug');
+            });
+        }
 
         if (metaTitleInput && seoPreviewTitle) {
             metaTitleInput.addEventListener('input', function() {

@@ -51,6 +51,13 @@ class HomePageContentController extends Controller
             'ssl_sandbox' => 'nullable|in:0,1',
             'ssl_store_id' => 'nullable|string|max:255',
             'ssl_store_password' => 'nullable|string|max:255',
+            'google_search_console_code' => 'nullable|string',
+            'google_analytics_id' => 'nullable|string|max:255',
+            'google_analytics_code' => 'nullable|string',
+            'google_pixel_id' => 'nullable|string|max:255',
+            'google_pixel_code' => 'nullable|string',
+            'custom_head_code' => 'nullable|string',
+            'custom_body_code' => 'nullable|string',
         ]);
 
         $content = HomePageContent::find(1);
@@ -99,6 +106,13 @@ class HomePageContentController extends Controller
             'ssl_sandbox' => $request->has('ssl_sandbox') ? (int)$request->ssl_sandbox : 0,
             'ssl_store_id' => $request->ssl_store_id,
             'ssl_store_password' => $request->ssl_store_password,
+            'google_search_console_code' => $request->google_search_console_code,
+            'google_analytics_id' => $request->google_analytics_id,
+            'google_analytics_code' => $request->google_analytics_code,
+            'google_pixel_id' => $request->google_pixel_id,
+            'google_pixel_code' => $request->google_pixel_code,
+            'custom_head_code' => $request->custom_head_code,
+            'custom_body_code' => $request->custom_body_code,
             // 'status' => $request->status,
         ]);
 

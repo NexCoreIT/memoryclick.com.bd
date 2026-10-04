@@ -50,9 +50,54 @@ $home_page_content = DB::table('home_page_contents')->first();
         }
     </style>
     @stack('styles')
+
+    <!-- Google Search Console -->
+    @if(!empty($home_page_content->google_search_console_code))
+        {!! $home_page_content->google_search_console_code !!}
+    @endif
+
+    <!-- Google Analytics (GTAG) -->
+    @if(!empty($home_page_content->google_analytics_code))
+        {!! $home_page_content->google_analytics_code !!}
+    @elseif(!empty($home_page_content->google_analytics_id))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $home_page_content->google_analytics_id }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ $home_page_content->google_analytics_id }}');
+        </script>
+    @endif
+
+    <!-- Google / Meta Pixel -->
+    @if(!empty($home_page_content->google_pixel_code))
+        {!! $home_page_content->google_pixel_code !!}
+    @elseif(!empty($home_page_content->google_pixel_id))
+        <script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '{{ $home_page_content->google_pixel_id }}');
+          fbq('track', 'PageView');
+        </script>
+    @endif
+
+    <!-- Custom Head Code -->
+    @if(!empty($home_page_content->custom_head_code))
+        {!! $home_page_content->custom_head_code !!}
+    @endif
 </head>
 
 <body>
+    <!-- Custom Body Code -->
+    @if(!empty($home_page_content->custom_body_code))
+        {!! $home_page_content->custom_body_code !!}
+    @endif
 
 
 

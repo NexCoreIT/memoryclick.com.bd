@@ -135,11 +135,29 @@
             margin-bottom: 0.75rem;
         }
 
-        .blog_content img {
+        .blog_content img,
+        .blog_content figure img,
+        .blog_content .image img {
             max-width: 100%;
-            height: auto;
+            height: auto !important;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .blog_content figure,
+        .blog_content .image {
+            max-width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .blog_content figure figcaption {
+            font-size: 13px;
+            color: #777;
+            margin-top: 6px;
+            font-style: italic;
         }
 
         .share_btn {
