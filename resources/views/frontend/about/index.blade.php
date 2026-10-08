@@ -1,5 +1,13 @@
 @extends('frontend.layout.app')
-@section('title', $title ?? 'About Us | Memory Click')
+@section('title', $page->meta_title ?? $title ?? 'About Us | Memory Click')
+@section('seo')
+    <meta name="description" content="{{ $page->meta_description ?? 'Learn more about Memory Click - your trusted wedding photography partner in Bangladesh.' }}">
+    <meta name="keywords" content="{{ $page->meta_keywords ?? 'memory click, about us, wedding photography' }}">
+    <meta property="og:title" content="{{ $page->meta_title ?? $title ?? 'About Us | Memory Click' }}">
+    <meta property="og:description" content="{{ $page->meta_description ?? '' }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
+@endsection
 @section('content')
     <style>
         .mt-5 {
@@ -48,17 +56,17 @@
                 <!-- Image Right -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-2">
                     <div class="about_bx text-center text-lg-end">
-                        <img src="{{ $page && $page->ceo_image ? asset($page->ceo_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md mt-5 mb-5"
-                            alt="">
+                        <img src="{{ $page && $page->ceo_image ? asset($page->ceo_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md"
+                            alt="CEO" style="width: 100%; max-height: 500px; object-fit: cover; object-position: top;">
                     </div>
                 </div>
                 <!-- Content Left -->
                 <div class="col-lg-6 order-lg-1">
-                    <div>
+                    <div class="pe-lg-5">
                         <p class="text-primary text-uppercase sub_title mb-2">{{ optional($page)->ceo_designation ?? 'CEO' }}</p>
                         <h1 class="title mb-4">{{ optional($page)->ceo_name ?? 'Founder & CEO' }}</h1>
                         <p class="mb-4 text-justify">
-                            {{ optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.' }}
+                            {!! nl2br(e(optional($page)->body ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.')) !!}
                         </p>
 
                     </div>
@@ -86,17 +94,17 @@
                 <!-- Image Left -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-1">
                     <div class="about_bx text-center text-lg-start">
-                        <img src="{{ $page && $page->memoryclick_image ? asset($page->memoryclick_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md mt-5"
-                            alt="">
+                        <img src="{{ $page && $page->memoryclick_image ? asset($page->memoryclick_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md"
+                            alt="Memoryclick Story" style="width: 100%; max-height: 500px; object-fit: cover;">
                     </div>
                 </div>
                 <!-- Content Right -->
                 <div class="col-lg-6 order-lg-2">
-                    <div>
+                    <div class="ps-lg-5">
                         <p class="text-primary text-uppercase sub_title mb-2">Our Journey</p>
                         <h1 class="title mb-4">Memoryclick Story</h1>
                         <p class="mb-4 text-justify">
-                            {{ optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.' }}
+                            {!! nl2br(e(optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.')) !!}
                         </p>
 
                     </div>
@@ -116,8 +124,8 @@
             <div class="row">
                 @forelse ($teams as $team)
                     <div class="col-sm-6 col-xl-3 my-3">
-                        <div class="team-membem shadow-sm bg-light p-3 p-lg-4 rounded text-center">
-                            <img src="{{ asset($team->image) }}" class="img-fluid rounded mb-3" alt="Photographer">
+                        <div class="team-membem shadow-sm bg-light p-3 p-lg-4 rounded text-center h-100">
+                            <img src="{{ asset($team->image) }}" class="img-fluid rounded mb-3" alt="Photographer" style="width: 100%; height: 280px; object-fit: cover; object-position: top;">
                             <h4>{{ $team->name }}</h4>
                             <p class="m-0 small">{{ $team->designation }}</p>
                         </div>

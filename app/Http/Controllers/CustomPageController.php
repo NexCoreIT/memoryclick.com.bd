@@ -61,7 +61,7 @@ public function update(Request $request, $id)
     // Validate inputs
     $validatedData = $request->validate([
         'title' => 'required|string|max:255',
-        'slug' => 'nullable|string|max:255|unique:custompages,slug,' . $id,
+        'slug' => 'nullable|string|max:255|unique:custom_pages,slug,' . $id,
         'meta_title' => 'required|string|max:255',
         'meta_description' => 'required|string|max:255',
         'meta_keywords' => 'required|string|max:255',
@@ -83,17 +83,17 @@ public function update(Request $request, $id)
     $item->meta_keywords = $validatedData['meta_keywords'];
     $item->status = $validatedData['status'];
     $item->body = $validatedData['body'];
-    $item->title_1 = $validatedData['title_1'] ?? $item->title_1;
-    $item->title_2 = $validatedData['title_2'] ?? $item->title_2;
+    $item->title_1 = $validatedData['title_1'];
+    $item->title_2 = $validatedData['title_2'];
 
 
 
     // Extra fields only for id == 1
     if ($item->id == 1) {
         // $item->about_ceo = $validatedData['about_ceo'] ?? $item->about_ceo;
-        $item->about_memoryclick = $validatedData['about_memoryclick'] ?? $item->about_memoryclick;
-        $item->ceo_name = $validatedData['ceo_name'] ?? $item->ceo_name;
-        $item->ceo_designation = $validatedData['ceo_designation'] ?? $item->ceo_designation;
+        $item->about_memoryclick = $validatedData['about_memoryclick'];
+        $item->ceo_name = $validatedData['ceo_name'];
+        $item->ceo_designation = $validatedData['ceo_designation'];
 
         // CEO Image Upload
         if ($request->hasFile('ceo_image')) {
