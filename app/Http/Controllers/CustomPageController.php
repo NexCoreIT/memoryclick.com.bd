@@ -60,7 +60,7 @@ public function update(Request $request, $id)
 
     // Validate inputs
     $validatedData = $request->validate([
-        'title' => 'required|string|max:255',
+        'title' => ($id == 1 ? 'nullable' : 'required') . '|string|max:255',
         'slug' => 'nullable|string|max:255|unique:custom_pages,slug,' . $id,
         'meta_title' => 'required|string|max:255',
         'meta_description' => 'required|string|max:255',
@@ -77,7 +77,7 @@ public function update(Request $request, $id)
     ]);
 
     // Assign common fields
-    $item->title = $validatedData['title'];
+    $item->title = $validatedData['title'] ?? $item->title;
     $item->meta_title = $validatedData['meta_title'];
     $item->meta_description = $validatedData['meta_description'];
     $item->meta_keywords = $validatedData['meta_keywords'];

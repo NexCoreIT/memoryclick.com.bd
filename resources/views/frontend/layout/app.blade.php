@@ -7,7 +7,17 @@ $home_page_content = DB::table('home_page_contents')->first();
     <meta charset="utf-8">
     {{-- <title>MemoryClick.com.bd - Photo Studio Website Template</title> --}}
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    @yield('seo')
+    @hasSection('seo')
+        @yield('seo')
+    @else
+        <meta name="description" content="Premium wedding photography and cinematography company based in Bangladesh">
+        <meta name="keywords" content="wedding photography, cinematography, bridal shoot, memory click">
+        <meta property="og:title" content="@yield('title', 'memoryclick.com.bd')">
+        <meta property="og:description" content="Premium wedding photography and cinematography company based in Bangladesh">
+        <meta property="og:image" content="{{ asset($home_page_content->image ?? 'fav.png') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta name="robots" content="index, follow">
+    @endif
     <title>@yield('title', 'memoryclick.com.bd')</title>
 
      <!-- Favicon -->

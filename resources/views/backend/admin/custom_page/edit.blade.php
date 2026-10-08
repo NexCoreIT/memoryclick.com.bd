@@ -23,6 +23,7 @@
                         @endif
                         <div class="row">
                             <!-- Title -->
+                            @if($item->id != 1)
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold">Title <span class="text-danger">*</span></label>
@@ -30,6 +31,7 @@
                                            value="{{ old('title', $item->title) }}" required>
                                 </div>
                             </div>
+                            @endif
 
                             @if($item->id !== 1)
                             <div class="col-md-12">
