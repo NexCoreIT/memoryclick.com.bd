@@ -99,7 +99,11 @@ public function update(Request $request, $id)
         if ($request->hasFile('ceo_image')) {
             $ceoImage = $request->file('ceo_image');
             $ceoImageName = 'ceo_' . time() . '.' . $ceoImage->getClientOriginalExtension();
-            $ceoImage->move(public_path('uploads/custompages/'), $ceoImageName);
+            $path = public_path('uploads/custompages/');
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $ceoImage->move($path, $ceoImageName);
             $item->ceo_image = 'uploads/custompages/' . $ceoImageName;
         }
 
@@ -107,7 +111,11 @@ public function update(Request $request, $id)
         if ($request->hasFile('memoryclick_image')) {
             $memoryImage = $request->file('memoryclick_image');
             $memoryImageName = 'memoryclick_' . time() . '.' . $memoryImage->getClientOriginalExtension();
-            $memoryImage->move(public_path('uploads/custompages/'), $memoryImageName);
+            $path = public_path('uploads/custompages/');
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            $memoryImage->move($path, $memoryImageName);
             $item->memoryclick_image = 'uploads/custompages/' . $memoryImageName;
         }
     }

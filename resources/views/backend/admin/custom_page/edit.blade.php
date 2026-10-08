@@ -92,14 +92,16 @@
                                 </div>
                             </div>
 
-                            <!-- CEO Image -->
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">CEO Image</label>
-                                    <input type="file" name="ceo_image" class="form-control">
-                                    @if(!empty($item->ceo_image))
-                                        <img src="{{ asset($item->ceo_image) }}" alt="CEO Image" class="img-thumbnail mt-2" width="150">
-                                    @endif
+                            <div class="row">
+                                <!-- CEO Image -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">CEO Image</label>
+                                        <input type="file" name="ceo_image" class="form-control" onchange="previewImage(event, 'ceoPreview')">
+                                        <img id="ceoPreview" src="{{ !empty($item->ceo_image) ? asset($item->ceo_image) : '' }}" 
+                                             alt="CEO Image" class="img-thumbnail mt-2" width="150" 
+                                             style="display: {{ !empty($item->ceo_image) ? 'block' : 'none' }}">
+                                    </div>
                                 </div>
                             </div>
 
@@ -115,10 +117,10 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label fw-bold">Memoryclick Image</label>
-                                    <input type="file" name="memoryclick_image" class="form-control">
-                                    @if(!empty($item->memoryclick_image))
-                                        <img src="{{ asset($item->memoryclick_image) }}" alt="Memoryclick Image" class="img-thumbnail mt-2" width="150">
-                                    @endif
+                                    <input type="file" name="memoryclick_image" class="form-control" onchange="previewImage(event, 'memoryclickPreview')">
+                                    <img id="memoryclickPreview" src="{{ !empty($item->memoryclick_image) ? asset($item->memoryclick_image) : '' }}" 
+                                         alt="Memoryclick Image" class="img-thumbnail mt-2" width="150"
+                                         style="display: {{ !empty($item->memoryclick_image) ? 'block' : 'none' }}">
                                 </div>
                             </div>
 
@@ -168,5 +170,16 @@
       tabsize: 4,
       height: 100
     });
+
+    // Image preview function
+    function previewImage(event, previewId) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 @endpush
