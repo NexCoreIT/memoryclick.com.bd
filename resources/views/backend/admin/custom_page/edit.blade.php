@@ -12,38 +12,26 @@
                 <form action="{{ route('custom.page.update',$item->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body p-4">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="row">
-                            <!-- Title & Meta Title Side by Side -->
-                            <div class="col-md-6">
+                            <!-- Title -->
+                            @if($item->id != 1)
+                            <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold">Title <span class="text-danger">*</span></label>
                                     <input type="text" name="title" class="form-control" placeholder="Title"
                                            value="{{ old('title', $item->title) }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Meta Title <span class="text-danger">*</span></label>
-                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title"
-                                           value="{{ old('meta_title', $item->meta_title) }}" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Meta Description <span class="text-danger">*</span></label>
-                                    <textarea name="meta_description" class="form-control" placeholder="Meta Description"
-                                              rows="3" required>{{ old('meta_description', $item->meta_description) }}</textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">Meta Keywords <span class="text-danger">*</span></label>
-                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keywords"
-                                           value="{{ old('meta_keywords', $item->meta_keywords) }}" required>
-                                </div>
-                            </div>
+                            @endif
 
                             @if($item->id !== 1)
                             <div class="col-md-12">
@@ -92,14 +80,17 @@
                                 </div>
                             </div>
 
-                            <!-- CEO Image -->
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label fw-bold">CEO Image</label>
-                                    <input type="file" name="ceo_image" class="form-control">
-                                    @if(!empty($item->ceo_image))
-                                        <img src="{{ asset($item->ceo_image) }}" alt="CEO Image" class="img-thumbnail mt-2" width="150">
-                                    @endif
+                            <div class="row">
+                                <!-- CEO Image -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">CEO Image</label>
+                                        <input type="file" name="ceo_image" class="form-control" onchange="previewImage(event, 'ceoPreview')">
+                                        <small class="text-muted mt-1 d-block"><i class="fas fa-info-circle"></i> Note: Standard recommended size is 600x600 pixels (or similar proportions).</small>
+                                        <img id="ceoPreview" src="{{ !empty($item->ceo_image) ? asset($item->ceo_image) : '' }}" 
+                                             alt="CEO Image" class="img-thumbnail mt-2" width="150" 
+                                             style="display: {{ !empty($item->ceo_image) ? 'block' : 'none' }}">
+                                    </div>
                                 </div>
                             </div>
 
@@ -115,10 +106,11 @@
 
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label fw-bold">Memoryclick Image</label>
-                                    <input type="file" name="memoryclick_image" class="form-control">
-                                    @if(!empty($item->memoryclick_image))
-                                        <img src="{{ asset($item->memoryclick_image) }}" alt="Memoryclick Image" class="img-thumbnail mt-2" width="150">
-                                    @endif
+                                    <input type="file" name="memoryclick_image" class="form-control" onchange="previewImage(event, 'memoryclickPreview')">
+                                    <small class="text-muted mt-1 d-block"><i class="fas fa-info-circle"></i> Note: Standard recommended size is 800x600 pixels (or similar proportions).</small>
+                                    <img id="memoryclickPreview" src="{{ !empty($item->memoryclick_image) ? asset($item->memoryclick_image) : '' }}" 
+                                         alt="Memoryclick Image" class="img-thumbnail mt-2" width="150"
+                                         style="display: {{ !empty($item->memoryclick_image) ? 'block' : 'none' }}">
                                 </div>
                             </div>
 
@@ -133,7 +125,34 @@
                             @endif
                             {{-- ✅ End Extra Fields --}}
 
+                            <!-- SEO Fields -->
+                            <hr class="my-4">
+                            <h4 class="mt-2 mb-3 fw-bold text-primary">SEO Settings & Status</h4>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Meta Title <span class="text-danger">*</span></label>
+                                    <input type="text" name="meta_title" class="form-control" placeholder="Meta Title"
+                                           value="{{ old('meta_title', $item->meta_title) }}" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Meta Keywords <span class="text-danger">*</span></label>
+                                    <input type="text" name="meta_keywords" class="form-control" placeholder="Meta Keywords"
+                                           value="{{ old('meta_keywords', $item->meta_keywords) }}" required>
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Meta Description <span class="text-danger">*</span></label>
+                                    <textarea name="meta_description" class="form-control" placeholder="Meta Description"
+                                              rows="3" required>{{ old('meta_description', $item->meta_description) }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label fw-bold">Status</label>
                                     <select name="status" class="form-control">
@@ -168,5 +187,16 @@
       tabsize: 4,
       height: 100
     });
+
+    // Image preview function
+    function previewImage(event, previewId) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById(previewId);
+            output.src = reader.result;
+            output.style.display = 'block';
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
 </script>
 @endpush

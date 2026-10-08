@@ -10,7 +10,7 @@
 
             <!-- Copyright -->
             <p class="mb-0">&copy; {{ date('Y') }} <a class="text-primary"
-                    href="#">MemoryClick.com.bd</a>. All Rights Reserved.</p>
+                    href="{{ route('home') }}">{{ !empty($links->footer_title) ? $links->footer_title : 'MemoryClick.com.bd' }}</a>. All Rights Reserved.</p>
 
             <!-- Social Media Links -->
             <div class="d-flex my-4 my-md-0 justify-content-center align-items-center">

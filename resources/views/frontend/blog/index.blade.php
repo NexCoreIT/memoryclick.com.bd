@@ -6,6 +6,7 @@
     <meta name="description" content="Discover the latest event photography tips, wedding cinematography trends, and studio stories from MemoryClick Studio.">
     <meta name="keywords" content="MemoryClick blog, photography tips, wedding photography, event videography, studio stories Bangladesh">
     <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -13,6 +14,13 @@
     <meta property="og:title" content="Blog & Stories | Memory Click">
     <meta property="og:description" content="Discover the latest event photography tips, wedding cinematography trends, and studio stories from MemoryClick Studio.">
     <meta property="og:image" content="{{ asset('fav.png') }}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="Blog & Stories | Memory Click">
+    <meta name="twitter:description" content="Discover the latest event photography tips, wedding cinematography trends, and studio stories from MemoryClick Studio.">
+    <meta name="twitter:image" content="{{ asset('fav.png') }}">
 @endsection
 
 @push('styles')
