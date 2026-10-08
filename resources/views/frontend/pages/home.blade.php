@@ -4,17 +4,8 @@
     $home_page_content = DB::table('home_page_contents')->first();
 @endphp
 
-@section('title', $seo_data->meta_title ?? $title ?? 'Home')
+@section('title', $home_page_content->meta_title ?? $title ?? 'Home')
 
-@section('seo')
-    <meta name="description" content="{{ $seo_data->meta_description ?? 'Default website description for SEO' }}">
-    <meta name="keywords" content="{{ $seo_data->meta_keywords ?? 'premium wedding photography and cinematography company based in Bangladesh' }}">
-    <meta property="og:title" content="{{ $seo_data->meta_title ?? 'memoryclick.net' }}">
-    <meta property="og:description" content="{{ $seo_data->meta_description ?? 'Default website description for SEO' }}">
-    <meta property="og:image" content="{{ asset($home_page_content->image ?? 'fav.png') }}">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta name="robots" content="index, follow">
-@endsection
 
 @section('content')
 @include('frontend.components.fixed.hero')

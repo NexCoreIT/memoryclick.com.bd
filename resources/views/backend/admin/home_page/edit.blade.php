@@ -230,6 +230,29 @@
 
                             <!-- Tab: Tracking -->
                             <div class="tab-pane" id="tabs-tracking" role="tabpanel">
+                                <!-- Global SEO Card -->
+                                <div class="card shadow-none border mb-4">
+                                    <div class="card-header bg-light py-2 px-3 fw-bold text-dark">
+                                        <i class="ti ti-search me-2"></i> Global & Homepage SEO Meta Tags
+                                    </div>
+                                    <div class="card-body p-3">
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Meta Title (SEO)</label>
+                                            <input type="text" name="meta_title" class="form-control" placeholder="e.g. MemoryClick - Premium Wedding Photography"
+                                                value="{{ old('meta_title', $item->meta_title) }}">
+                                            <div class="form-text text-muted small mt-1">This will be used as the default title for the homepage and any page without specific SEO data.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label fw-bold">Meta Keywords</label>
+                                            <textarea name="meta_keywords" class="form-control small" rows="2" placeholder="e.g. wedding photography, cinematography, bridal shoot">{{ old('meta_keywords', $item->meta_keywords) }}</textarea>
+                                        </div>
+                                        <div class="mb-0">
+                                            <label class="form-label fw-bold">Meta Description</label>
+                                            <textarea name="meta_description" class="form-control small" rows="3" placeholder="e.g. Premium wedding photography and cinematography company based in Bangladesh">{{ old('meta_description', $item->meta_description) }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                                     <h4 class="text-primary fw-bold mb-0 d-flex align-items-center">
                                         Google Pixel, Analytics & Search Console Settings

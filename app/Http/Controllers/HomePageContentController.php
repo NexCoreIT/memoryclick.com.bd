@@ -58,6 +58,9 @@ class HomePageContentController extends Controller
             'google_pixel_code' => 'nullable|string',
             'custom_head_code' => 'nullable|string',
             'custom_body_code' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+            'meta_keywords' => 'nullable|string',
         ]);
 
         $content = HomePageContent::find(1);
@@ -113,6 +116,9 @@ class HomePageContentController extends Controller
             'google_pixel_code' => $request->google_pixel_code,
             'custom_head_code' => $request->custom_head_code,
             'custom_body_code' => $request->custom_body_code,
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
+            'meta_keywords' => $request->meta_keywords,
             // 'status' => $request->status,
         ]);
 

@@ -10,15 +10,15 @@ $home_page_content = DB::table('home_page_contents')->first();
     @hasSection('seo')
         @yield('seo')
     @else
-        <meta name="description" content="Premium wedding photography and cinematography company based in Bangladesh">
-        <meta name="keywords" content="wedding photography, cinematography, bridal shoot, memory click">
-        <meta property="og:title" content="@yield('title', 'memoryclick.com.bd')">
-        <meta property="og:description" content="Premium wedding photography and cinematography company based in Bangladesh">
+        <meta name="description" content="{{ $home_page_content->meta_description ?? 'Premium wedding photography and cinematography company based in Bangladesh' }}">
+        <meta name="keywords" content="{{ $home_page_content->meta_keywords ?? 'wedding photography, cinematography, bridal shoot, memory click' }}">
+        <meta property="og:title" content="{{ $home_page_content->meta_title ?? 'Memory Click' }}">
+        <meta property="og:description" content="{{ $home_page_content->meta_description ?? 'Premium wedding photography and cinematography company based in Bangladesh' }}">
         <meta property="og:image" content="{{ asset($home_page_content->image ?? 'fav.png') }}">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta name="robots" content="index, follow">
     @endif
-    <title>@yield('title', 'memoryclick.com.bd')</title>
+    <title>@yield('title', $home_page_content->meta_title ?? 'Memory Click')</title>
 
      <!-- Favicon -->
     <link rel="icon" href="{{ asset('fav.png') }}" type="image/x-icon">
