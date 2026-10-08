@@ -34,41 +34,27 @@
     </div>
     <!-- breadcrump end -->
 
-    <!-- About Start -->
-    <div class="about_sec section_gap bg-white" style="padding-top: 25px; padding-bottom: 25px;">
-        <div class="container">
-            @if($page)
-                {!! $page->body !!}
-            @else
-                <div class="text-center">
-                    <h2>About Memory Click</h2>
-                    <p class="mb-0">Content coming soon.</p>
-                </div>
-            @endif
-        </div>
-    </div>
-    <!-- About End -->
+
 
     <!-- Founder Start -->
-    <div class="founder_sec bg-light section_gap">
-        <div class="container">
+    <div class="founder_sec bg-white section_gap py-5">
+        <div class="container py-lg-4">
             <div class="row d-flex align-items-center">
                 <!-- Image Right -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-2">
-                    <div class="about_bx text-center text-lg-end">
-                        <img src="{{ $page && $page->ceo_image ? asset($page->ceo_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md"
-                            alt="CEO" style="width: 100%; max-height: 500px; object-fit: cover; object-position: top;">
+                    <div class="about_bx text-center text-lg-end position-relative">
+                        <img src="{{ $page && $page->ceo_image ? asset($page->ceo_image) : asset('default.jpg') }}" class="img-fluid rounded shadow"
+                            alt="CEO" style="width: 100%; max-height: 550px; object-fit: cover; object-position: top;">
                     </div>
                 </div>
                 <!-- Content Left -->
                 <div class="col-lg-6 order-lg-1">
                     <div class="pe-lg-5">
-                        <p class="text-primary text-uppercase sub_title mb-2">{{ optional($page)->ceo_designation ?? 'CEO' }}</p>
-                        <h1 class="title mb-4">{{ optional($page)->ceo_name ?? 'Founder & CEO' }}</h1>
-                        <p class="mb-4 text-justify">
+                        <p class="text-primary text-uppercase sub_title mb-2 fw-bold" style="letter-spacing: 1px;">{{ optional($page)->ceo_designation ?? 'CEO' }}</p>
+                        <h2 class="display-6 mb-4 fw-bold text-dark">{{ optional($page)->ceo_name ?? 'Founder & CEO' }}</h2>
+                        <div class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
                             {!! nl2br(e(optional($page)->body ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.')) !!}
-                        </p>
-
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,37 +62,31 @@
     </div>
     <!-- Founder End -->
 
-    <!-- About Memoryclick (Title Section) -->
-    <div class="about_sec bg-white" style="padding-top: 25px; padding-bottom: 25px;">
-        <div class="container">
-            <div class="text-center">
-                <h2>{{ optional($page)->title_2 ?? 'About MemoryClick' }}</h2>
-            </div>
-        </div>
-    </div>
-    <!-- About Memoryclick End -->
-
-
-    <!-- About Memoryclick (Details Section) -->
+    <!-- About Memoryclick Start -->
     <div class="about_memoryclick section_gap bg-light py-5">
-        <div class="container">
+        <div class="container py-lg-4">
+            <!-- Title Header -->
+            <div class="text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+                <h2 class="display-6 fw-bold text-dark mb-3">{{ optional($page)->title_2 ?? 'About MemoryClick' }}</h2>
+                <div class="mx-auto bg-primary rounded" style="height: 3px; width: 60px;"></div>
+            </div>
+
             <div class="row d-flex align-items-center">
                 <!-- Image Left -->
                 <div class="col-lg-6 mb-4 mb-lg-0 order-lg-1">
-                    <div class="about_bx text-center text-lg-start">
-                        <img src="{{ $page && $page->memoryclick_image ? asset($page->memoryclick_image) : asset('default.jpg') }}" class="img-fluid rounded shape-md"
-                            alt="Memoryclick Story" style="width: 100%; max-height: 500px; object-fit: cover;">
+                    <div class="about_bx text-center text-lg-start position-relative">
+                        <img src="{{ $page && $page->memoryclick_image ? asset($page->memoryclick_image) : asset('default.jpg') }}" class="img-fluid rounded shadow"
+                            alt="Memoryclick Story" style="width: 100%; max-height: 550px; object-fit: cover;">
                     </div>
                 </div>
                 <!-- Content Right -->
                 <div class="col-lg-6 order-lg-2">
                     <div class="ps-lg-5">
-                        <p class="text-primary text-uppercase sub_title mb-2">Our Journey</p>
-                        <h1 class="title mb-4">Memoryclick Story</h1>
-                        <p class="mb-4 text-justify">
+                        <p class="text-primary text-uppercase sub_title mb-2 fw-bold" style="letter-spacing: 1px;">Our Journey</p>
+                        <h2 class="mb-4 fw-bold text-dark">Memoryclick Story</h2>
+                        <div class="mb-4 text-muted" style="line-height: 1.8; font-size: 1.1rem;">
                             {!! nl2br(e(optional($page)->about_memoryclick ?? 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.')) !!}
-                        </p>
-
+                        </div>
                     </div>
                 </div>
             </div>
