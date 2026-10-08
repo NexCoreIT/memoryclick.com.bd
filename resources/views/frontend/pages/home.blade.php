@@ -114,13 +114,13 @@
             </div>
             <div class="owl-carousel testimonial-carousel">
                 @forelse ($testimonials as $testimonial)
-                    <div class="testimonial-item bg-white p-3 p-lg-4 rounded shodow-sm border">
+                    <div class="testimonial-item bg-white p-3 p-lg-4 rounded shadow-sm border h-100 d-flex flex-column">
                         <div class="d-flex align-items-center mb-4">
                             <img class="flex-shrink-0 rounded-circle border p-1" width="100" height="100"
-                                src="{{ asset($testimonial->image) }}" alt="">
+                                src="{{ asset($testimonial->image) }}" alt="" style="object-fit: cover;">
                             <div class="ms-2 ms-lg-4">
-                                <h5 class="mb-1">{{ $testimonial->name }}</h5>
-                                <span>{{ $testimonial->designation }}</span>
+                                <h5 class="mb-1 fw-bold text-dark">{{ $testimonial->name }}</h5>
+                                <span class="text-muted">{{ $testimonial->designation }}</span>
                             </div>
                         </div>
                         <div class="start mb-3">
@@ -128,13 +128,28 @@
                                 @if ($i <= $testimonial->rating)
                                     <i class="fa fa-star text-primary small"></i>
                                 @else
-                                    <i class="fa fa-star text_light small"></i>
+                                    <i class="fa fa-star text-light small"></i>
                                 @endif
                             @endfor
                         </div>
-                        <p class="mb-0">
-                            {{ $testimonial->description }}
-                        </p>
+                        @php
+                            $isLong = strlen($testimonial->description) > 150;
+                            $shortDesc = Str::limit($testimonial->description, 150, '...');
+                        @endphp
+                        <div class="testimonial-text-wrapper flex-grow-1">
+                            <p class="mb-0 text-muted text-justify" id="review-short-{{$testimonial->id}}" style="line-height: 1.6;">
+                                {{ $shortDesc }}
+                                @if($isLong)
+                                    <a href="javascript:void(0)" onclick="toggleReview({{$testimonial->id}})" class="text-primary fw-bold text-decoration-none ms-1">Learn more</a>
+                                @endif
+                            </p>
+                            @if($isLong)
+                                <p class="mb-0 text-muted text-justify d-none" id="review-full-{{$testimonial->id}}" style="line-height: 1.6;">
+                                    {{ $testimonial->description }}
+                                    <a href="javascript:void(0)" onclick="toggleReview({{$testimonial->id}})" class="text-primary fw-bold text-decoration-none ms-1">Show less</a>
+                                </p>
+                            @endif
+                        </div>
                     </div>
                 @empty
                     <strong class="text-danger">NO DATA FOUND</strong>
@@ -231,7 +246,40 @@
 
 @endsection
 @push('styles')
+<style>
+    /* Make owl carousel items equal height */
+    .testimonial-carousel .owl-stage {
+        display: flex;
+        align-items: stretch;
+    }
+    .testimonial-carousel .owl-item {
+        display: flex;
+    }
+    .testimonial-carousel .owl-item > div {
+        width: 100%;
+    }
+</style>
 @endpush
 
 @push('scripts')
+<script>
+    function toggleReview(id) {
+        var short = document.getElementById('review-short-' + id);
+        var full = document.getElementById('review-full-' + id);
+        if (short.classList.contains('d-none')) {
+            // Show short, hide full
+            short.classList.remove('d-none');
+            full.classList.add('d-none');
+        } else {
+            // Hide short, show full
+            short.classList.add('d-none');
+            full.classList.remove('d-none');
+        }
+        
+        // Let Owl Carousel recalculate height after content change
+        setTimeout(function() {
+            $('.testimonial-carousel').trigger('refresh.owl.carousel');
+        }, 50);
+    }
+</script>
 @endpush

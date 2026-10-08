@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         // Static SEO data
         $data['seo'] = [
-            'meta_title'       => 'Home',
+            'meta_title'       => 'Memory Click | Best Wedding Photographer in Bangladesh',
             'meta_description' => 'Premium wedding photography and cinematography company based in Bangladesh',
             'meta_keywords'    => 'wedding photography, cinematography, bridal shoot, memory click',
         ];
@@ -62,14 +62,15 @@ class HomeController extends Controller
         return view('frontend.photography.index', $data);
     }
 
-    public function photographyDetails($slug){
+    public function photographyDetails($slug)
+    {
 
         $data['title'] = "Top Services";
 
         $data['row'] = Photography::where('slug', $slug)->firstOrFail();
 
 
-        return view('frontend.photography.details',$data);
+        return view('frontend.photography.details', $data);
     }
 
 
@@ -126,14 +127,15 @@ class HomeController extends Controller
         return view('frontend.top_service.index', $data);
     }
 
-    public function topServiceDetails($slug){
+    public function topServiceDetails($slug)
+    {
 
         $data['title'] = "Service Details";
 
         $data['service'] = OurService::where('slug', $slug)->firstOrFail();
 
 
-        return view('frontend.top_service.details',$data);
+        return view('frontend.top_service.details', $data);
     }
 
 
