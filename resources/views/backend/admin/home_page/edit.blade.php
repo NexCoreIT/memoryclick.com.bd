@@ -115,8 +115,8 @@
                                 <h4 class="text-primary fw-bold mb-3">Footer Section</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Footer Title</label>
-                                        <input type="text" name="footer_title" class="form-control" placeholder="Footer Title"
+                                        <label class="form-label">Footer Copyright</label>
+                                        <input type="text" name="footer_title" class="form-control" placeholder="Footer Copyright"
                                             value="{{ old('footer_title', $item->footer_title) }}" required>
                                     </div>
                                 </div>
