@@ -1,10 +1,14 @@
 @extends('frontend.layout.app')
 @section('title', $page->meta_title ?? $title ?? 'About Us | Memory Click')
+@php
+    $home_page_content = DB::table('home_page_contents')->first();
+@endphp
 @section('seo')
     <meta name="description" content="{{ $page->meta_description ?? 'Learn more about Memory Click - your trusted wedding photography partner in Bangladesh.' }}">
     <meta name="keywords" content="{{ $page->meta_keywords ?? 'memory click, about us, wedding photography' }}">
     <meta property="og:title" content="{{ $page->meta_title ?? $title ?? 'About Us | Memory Click' }}">
     <meta property="og:description" content="{{ $page->meta_description ?? '' }}">
+    <meta property="og:image" content="{{ asset($home_page_content->image ?? 'fav.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta name="robots" content="index, follow">
 @endsection
