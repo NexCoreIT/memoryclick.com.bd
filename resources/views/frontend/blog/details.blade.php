@@ -16,6 +16,7 @@
     <meta name="description" content="{{ $seoDescription }}">
     <meta name="keywords" content="{{ $seoKeywords }}">
     <link rel="canonical" href="{{ $seoUrl }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
