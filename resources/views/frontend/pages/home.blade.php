@@ -93,7 +93,60 @@
         </div>
 
     </div>
-    <!-- Services End -->
+</div>
+<!-- Services End -->
+
+<!-- Packages Start -->
+<div class="package_sec py-5 mt-4 mt-lg-5 bg-white">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+            <p class="text-primary text-uppercase sub_title mb-2">Our Packages</p>
+            <h1 class="display-6 mb-0">Explore Our Latest Packages</h1>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            @forelse ($latest_packages as $package)
+                <div class="col-md-6 col-lg-4">
+                    <div class="package_list text-center h-100 border p-2 rounded shape-sm">
+                        <img src="{{ asset($package->image) }}" class="img-fluid mb-2 d-block rounded"
+                            alt="">
+                        <h4>{{ $package->package_name }}</h4>
+                        <p class="m-0">
+                            @php
+                                $people = array_filter([
+                                    $package->chief,
+                                    $package->photographer,
+                                    $package->cinematographer,
+                                ]);
+                            @endphp
+                            {{ implode(' + ', $people) }}
+                        </p>
+                        <div class="d-flex mt-4 align-items-center justify-content-between">
+                            <div><strong>TK. {{ $package->price }}</strong></div>
+                            <div>
+                                <button class="btn btn-primary p-2 px-3 btn-sm viewPackageDetails"
+                                    data-id="{{ $package->id }}" data-bs-toggle="modal"
+                                    data-bs-target="#packageDetails">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center">
+                    <strong class="text-muted">NO PACKAGES FOUND</strong>
+                </div>
+            @endforelse
+        </div>
+        
+        @if($latest_packages->count() > 0)
+            <div class="text-center mt-5">
+                <a class="btn btn-primary py-2 px-4" href="{{ route('package') }}">View All Packages</a>
+            </div>
+        @endif
+    </div>
+</div>
+<!-- Packages End -->
 
 
     <!-- reviews Start -->
@@ -381,6 +434,15 @@
     </div>
     <!-- Contact Section End -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="packageDetails" tabindex="-1" aria-labelledby="packageDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div id="packageDetailsContent">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('styles')
 <style>
@@ -437,5 +499,28 @@
             $('.testimonial-carousel').trigger('refresh.owl.carousel');
         }, 50);
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $('.viewPackageDetails').click(function() {
+            var packageId = $(this).data('id');
+            $.ajax({
+                url: "{{ route('package.details') }}",
+                type: "GET",
+                data: {
+                    id: packageId
+                },
+                success: function(response) {
+                    $('#packageDetailsContent').html(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                    $('#packageDetailsContent').html(
+                        '<div class="p-4 text-center">Something went wrong. Please try again later.</div>'
+                    );
+                }
+            });
+        });
+    });
 </script>
 @endpush
