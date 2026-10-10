@@ -93,7 +93,60 @@
         </div>
 
     </div>
-    <!-- Services End -->
+</div>
+<!-- Services End -->
+
+<!-- Packages Start -->
+<div class="package_sec py-5 mt-4 mt-lg-5 bg-white">
+    <div class="container">
+        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+            <p class="text-primary text-uppercase sub_title mb-2">Our Packages</p>
+            <h1 class="display-6 mb-0">Explore Our Latest Packages</h1>
+        </div>
+        <div class="row gy-4 justify-content-center">
+            @forelse ($latest_packages as $package)
+                <div class="col-md-6 col-lg-4">
+                    <div class="package_list text-center h-100 border p-2 rounded shape-sm">
+                        <img src="{{ asset($package->image) }}" class="img-fluid mb-2 d-block rounded"
+                            alt="">
+                        <h4>{{ $package->package_name }}</h4>
+                        <p class="m-0">
+                            @php
+                                $people = array_filter([
+                                    $package->chief,
+                                    $package->photographer,
+                                    $package->cinematographer,
+                                ]);
+                            @endphp
+                            {{ implode(' + ', $people) }}
+                        </p>
+                        <div class="d-flex mt-4 align-items-center justify-content-between">
+                            <div><strong>TK. {{ $package->price }}</strong></div>
+                            <div>
+                                <button class="btn btn-primary p-2 px-3 btn-sm viewPackageDetails"
+                                    data-id="{{ $package->id }}" data-bs-toggle="modal"
+                                    data-bs-target="#packageDetails">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center">
+                    <strong class="text-muted">NO PACKAGES FOUND</strong>
+                </div>
+            @endforelse
+        </div>
+        
+        @if($latest_packages->count() > 0)
+            <div class="text-center mt-5">
+                <a class="btn btn-primary py-2 px-4" href="{{ route('package') }}">View All Packages</a>
+            </div>
+        @endif
+    </div>
+</div>
+<!-- Packages End -->
 
 
     <!-- reviews Start -->
@@ -297,6 +350,99 @@
     </div>
     <!-- Blog Section End -->
 
+    <!-- Contact Section Start -->
+    <div class="contact_sec py-5 mt-4 mt-lg-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+                <p class="text-primary text-uppercase sub_title mb-2">Contact Us</p>
+                <h1 class="display-6 mb-3 fw-bold text-dark">Get In Touch</h1>
+                <p class="text-muted small">We'd love to hear from you. Leave us a message!</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-5 order-lg-2 mb-4 mb-lg-0">
+                    <div class="contact_info mb-4 bg-light p-4 rounded shadow-sm h-100 d-flex flex-column">
+                        <div class="d-flex mb-4 align-items-center">
+                            <div class="me-3 text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="">
+                                {{ $home_page_content->address ?? '_' }}
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4 align-items-center">
+                            <div class="me-3 text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                            </div>
+                            <div class="">
+                                <a href="mailto:{{ $home_page_content->email ?? '#'}}">{{ $home_page_content->email ?? '_'}}</a>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-call-icon lucide-phone-call"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 7.94"/><path d="M14.05 6A5 5 0 0 1 18 10"/></svg>
+                            </div>
+                            <div class="">
+                                <a href="tel:{{ $home_page_content->phone ?? '#' }}">{{ $home_page_content->phone ?? '_' }}</a>
+                            </div>
+                        </div>
+                        <div class="map p-0 mb-0 mt-4 flex-grow-1">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52872517.59607392!2d-161.691169406869!3d36.018281840171966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2z4Kau4Ka-4Kaw4KeN4KaV4Ka_4KaoIOCmr-CngeCmleCnjeCmpOCmsOCmvuCmt-CnjeCmn-CnjeCmsA!5e0!3m2!1sbn!2sbd!4v1745556191423!5m2!1sbn!2sbd" width="100%" height="250" class="border-0 p-0 rounded w-100" style="min-height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 order-lg-1">
+                    <div class="bg-light p-4 rounded shadow-sm h-100">
+                        <h5 class="mb-4 fw-bold">Send Us a Message</h5>
+                        <form method="post" action="{{route('contact.store')}}">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control shadow-none border-0" name="name" id="name" placeholder="Your Name" required>
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control shadow-none border-0" name="email" id="email" placeholder="Your Email" required>
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control shadow-none border-0"  name="subject" id="subject" placeholder="Subject" required>
+                                        <label for="subject">Subject</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control shadow-none border-0" name="message" placeholder="Leave a message here" id="message" required
+                                            style="height: 200px"></textarea>
+                                        <label for="message">Message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button class="btn btn-primary py-3 px-5 w-100 fw-bold" type="submit">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Section End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="packageDetails" tabindex="-1" aria-labelledby="packageDetailsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div id="packageDetailsContent">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('styles')
 <style>
@@ -353,5 +499,28 @@
             $('.testimonial-carousel').trigger('refresh.owl.carousel');
         }, 50);
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $('.viewPackageDetails').click(function() {
+            var packageId = $(this).data('id');
+            $.ajax({
+                url: "{{ route('package.details') }}",
+                type: "GET",
+                data: {
+                    id: packageId
+                },
+                success: function(response) {
+                    $('#packageDetailsContent').html(response);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                    $('#packageDetailsContent').html(
+                        '<div class="p-4 text-center">Something went wrong. Please try again later.</div>'
+                    );
+                }
+            });
+        });
+    });
 </script>
 @endpush

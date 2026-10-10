@@ -48,6 +48,12 @@ class HomeController extends Controller
         $data['recent_work'] = Photography::where('status', '1')->latest()->take(4)->get();
         $data['cinematography'] = Cinematography::where('status', '1')->get();
         $data['blogs'] = BlogPost::with('category')->where('status', 1)->latest()->take(3)->get();
+        
+        $data['latest_packages'] = Package::with(['features', 'division', 'category'])
+            ->active()
+            ->latest()
+            ->take(6)
+            ->get();
 
         return view('frontend.pages.home', $data);
     }
