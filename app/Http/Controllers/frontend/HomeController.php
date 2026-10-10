@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use App\Models\HomePageContent;
 use App\Models\Package;
 use App\Models\PackageCategory;
+use App\Models\BlogPost;
 
 class HomeController extends Controller
 {
@@ -46,6 +47,7 @@ class HomeController extends Controller
         $data['service'] = OurService::where('status', '1')->orderBy('id', 'DESC')->get();
         $data['recent_work'] = Photography::where('status', '1')->latest()->take(4)->get();
         $data['cinematography'] = Cinematography::where('status', '1')->get();
+        $data['blogs'] = BlogPost::with('category')->where('status', 1)->latest()->take(3)->get();
 
         return view('frontend.pages.home', $data);
     }
