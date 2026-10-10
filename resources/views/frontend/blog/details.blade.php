@@ -300,8 +300,12 @@
                                 @foreach ($relatedPosts as $relPost)
                                     <div class="col-12 col-md-4">
                                         <div class="card h-100 border-0 shadow-sm rounded overflow-hidden">
-                                            @if(!empty($relPost->image))
+                                            @if(!empty($relPost->image) && file_exists(public_path($relPost->image)))
                                                 <img src="{{ asset($relPost->image) }}" class="card-img-top" alt="{{ $relPost->title }}" style="height: 160px; object-fit: cover;">
+                                            @else
+                                                <div class="bg-light d-flex align-items-center justify-content-center p-3 border-bottom" style="height: 160px;">
+                                                    <img src="{{ asset('fav.png') }}" alt="{{ $relPost->title }}" style="max-height: 70px; max-width: 75%; object-fit: contain;">
+                                                </div>
                                             @endif
                                             <div class="card-body p-3 d-flex flex-column">
                                                 @if($relPost->category)

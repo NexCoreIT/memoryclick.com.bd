@@ -228,7 +228,9 @@
                                     @if (!empty($post->image) && file_exists(public_path($post->image)))
                                         <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="blog_card_img" loading="lazy">
                                     @else
-                                        <img src="{{ asset('fav.png') }}" alt="{{ $post->title }}" class="blog_card_img p-4 bg-dark object-fit-contain" loading="lazy">
+                                        <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light p-3">
+                                            <img src="{{ asset('fav.png') }}" alt="{{ $post->title }}" style="max-height: 90px; max-width: 75%; object-fit: contain;">
+                                        </div>
                                     @endif
                                 </a>
                             </div>

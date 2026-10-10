@@ -235,6 +235,68 @@
     </div>
     <!-- Cinematography  End -->
 
+    <!-- Blog Section Start -->
+    <div class="blog_sec py-5 mt-4 mt-lg-5 bg-light">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+                <p class="text-primary text-uppercase sub_title mb-2">Blog & Insights</p>
+                <h1 class="display-6 mb-3 fw-bold text-dark">Wedding & Photography Insights</h1>
+                <p class="text-muted small">Advice and guides to help you capture every precious moment timelessly.</p>
+            </div>
+
+            <div class="row g-4">
+                @forelse ($blogs as $blog)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border rounded-3 shadow-sm bg-white blog-card-item">
+                            @if(!empty($blog->image) && file_exists(public_path($blog->image)))
+                                <a href="{{ route('blog.details', $blog->slug) }}" class="d-block overflow-hidden rounded-top-3">
+                                    <img src="{{ asset($blog->image) }}" class="card-img-top w-100 blog-img" alt="{{ $blog->title }}">
+                                </a>
+                            @else
+                                <a href="{{ route('blog.details', $blog->slug) }}" class="d-block bg-light text-center rounded-top-3 border-bottom d-flex align-items-center justify-content-center" style="height: 220px;">
+                                    <img src="{{ asset('fav.png') }}" alt="{{ $blog->title }}" style="max-height: 90px; max-width: 75%; object-fit: contain;">
+                                </a>
+                            @endif
+
+                            <div class="card-body p-4 d-flex flex-column">
+                                <h5 class="card-title fw-bold mb-2">
+                                    <a href="{{ route('blog.details', $blog->slug) }}" class="text-dark text-decoration-none blog-title-link">
+                                        {{ Str::limit($blog->title, 65, '...') }}
+                                    </a>
+                                </h5>
+
+                                <p class="text-muted small mb-3 fw-semibold">
+                                    {{ $blog->category->name ?? 'Wedding Photography' }}
+                                </p>
+
+                                <p class="card-text text-muted small mb-4 flex-grow-1" style="line-height: 1.6;">
+                                    {{ Str::limit(strip_tags($blog->short_description ?? $blog->description), 130) }}
+                                </p>
+
+                                <div class="mt-auto">
+                                    <a href="{{ route('blog.details', $blog->slug) }}" class="text-dark fw-bold text-decoration-underline read-more-btn">
+                                        Read More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12 text-center py-4">
+                        <strong class="text-muted">NO BLOG POSTS FOUND</strong>
+                    </div>
+                @endforelse
+            </div>
+
+            @if(isset($blogs) && count($blogs) > 0)
+                <div class="text-center mt-5">
+                    <a class="btn btn-primary py-2 px-4" href="{{ route('blog.index') }}">View All Blogs</a>
+                </div>
+            @endif
+        </div>
+    </div>
+    <!-- Blog Section End -->
+
 @endsection
 @push('styles')
 <style>
@@ -248,6 +310,25 @@
     }
     .testimonial-carousel .owl-item > div {
         width: 100%;
+    }
+    .blog-card-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .blog-card-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+    }
+    .blog-img {
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+    .blog-card-item:hover .blog-img {
+        transform: scale(1.05);
+    }
+    .blog-title-link:hover,
+    .read-more-btn:hover {
+        color: #d4a373 !important;
     }
 </style>
 @endpush
