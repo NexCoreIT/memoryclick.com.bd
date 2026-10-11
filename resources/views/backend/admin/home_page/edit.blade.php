@@ -168,6 +168,29 @@
                                         <input type="tel" name="phone" class="form-control" placeholder="Phone"
                                             value="{{ old('phone', $item->phone) }}">
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Google Maps Embed Code / URL</label>
+                                        <textarea name="google_map" class="form-control" rows="3" placeholder="Paste Google Maps <iframe> embed code or embed URL here">{{ old('google_map', $item->google_map) }}</textarea>
+                                        <small class="text-muted d-block mt-1">Paste the full Google Maps &lt;iframe ...&gt;&lt;/iframe&gt; embed code or the embed URL (from Google Maps &gt; Share &gt; Embed a map).</small>
+                                        @if(!empty($item->google_map))
+                                            <div class="mt-3">
+                                                <label class="form-label fw-semibold text-muted small">Current Map Preview:</label>
+                                                <div class="border rounded overflow-hidden" style="max-width: 600px; height: 220px; background: #f8f9fa;">
+                                                    @php
+                                                        $previewMap = $item->google_map;
+                                                        if (preg_match('/src=["\']([^"\']+)["\']/', $previewMap, $matches)) {
+                                                            $previewMap = $matches[1];
+                                                        }
+                                                    @endphp
+                                                    @if(filter_var($previewMap, FILTER_VALIDATE_URL) || \Illuminate\Support\Str::startsWith($previewMap, ['http://', 'https://', '//']))
+                                                        <iframe src="{{ $previewMap }}" width="100%" height="220" class="border-0 w-100" style="min-height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                    @else
+                                                        {!! $item->google_map !!}
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                                 <hr class="my-4">
                                 <h4 class="text-primary fw-bold mb-3">Social Media Links</h4>

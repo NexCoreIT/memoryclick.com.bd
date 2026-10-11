@@ -386,9 +386,21 @@
                                 <a href="tel:{{ $home_page_content->phone ?? '#' }}">{{ $home_page_content->phone ?? '_' }}</a>
                             </div>
                         </div>
-                        <div class="map p-0 mb-0 mt-4 flex-grow-1">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52872517.59607392!2d-161.691169406869!3d36.018281840171966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2z4Kau4Ka-4Kaw4KeN4KaV4Ka_4KaoIOCmr-CngeCmleCnjeCmpOCmsOCmvuCmt-CnjeCmn-CnjeCmsA!5e0!3m2!1sbn!2sbd!4v1745556191423!5m2!1sbn!2sbd" width="100%" height="250" class="border-0 p-0 rounded w-100" style="min-height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
+                        @if(!empty($home_page_content->google_map))
+                            <div class="map p-0 mb-0 mt-4 flex-grow-1">
+                                @php
+                                    $mapSrc = $home_page_content->google_map;
+                                    if (preg_match('/src=["\']([^"\']+)["\']/', $mapSrc, $matches)) {
+                                        $mapSrc = $matches[1];
+                                    }
+                                @endphp
+                                @if(filter_var($mapSrc, FILTER_VALIDATE_URL) || \Illuminate\Support\Str::startsWith($mapSrc, ['http://', 'https://', '//']))
+                                    <iframe src="{{ $mapSrc }}" width="100%" height="250" class="border-0 p-0 rounded w-100" style="min-height: 100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                @else
+                                    {!! $home_page_content->google_map !!}
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-7 order-lg-1">

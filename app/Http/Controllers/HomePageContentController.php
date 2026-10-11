@@ -61,6 +61,8 @@ class HomePageContentController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
+            'address' => 'nullable|string',
+            'google_map' => 'nullable|string',
         ]);
 
         $content = HomePageContent::find(1);
@@ -93,6 +95,7 @@ class HomePageContentController extends Controller
             'twitter_link' => $request->twitter_link,
             'email' => $request->email,
             'address' => $request->address,
+            'google_map' => $request->google_map,
             // 'messenger_username' => $request->messenger_username,
             'phone' => $request->phone,
             'since_year' => $request->since_year,
