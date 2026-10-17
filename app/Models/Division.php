@@ -13,5 +13,9 @@ class Division extends Model
     {
         return $q->where('status', '1');
     }
-    
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

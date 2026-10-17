@@ -1,0 +1,68 @@
+@media screen and (min-width:992px) {
+    #lightgallery {
+        min-height: 500px;
+    }
+
+    .package_sec {
+        min-height: 700px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .mobile_menu .nav-link {
+        color: #000 !important;
+        font-size: 15px;
+        display: block;
+        border-bottom: 1px solid #f2f2f2;
+        padding: 12px 18px;
+    }
+
+    .mobile_menu .accordion-button {
+        color: #000 !important;
+    }
+
+    .mobile_menu .offcanvas {
+        width: 300px;
+    }
+
+    .mobile_menu .nav-link:hover {
+        color: var(--primary);
+    }
+
+    .mobile_menu .dropdown-item:hover,
+    .mobile_menu .dropdown-item:focus {
+        background: transparent;
+        color: var(--primary);
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #000 !important;
+        background-color: transparent !important;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .team-img::after {
+        display: none;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .display-6 {
+        font-size: 20px;
+    }
+
+    .sub_title {
+        font-size: 15px !important;
+    }
+
+    .recent_work_item h4 {
+        font-size: 18px;
+    }
+
+    .section_gap {
+        padding: 30px 0px;
+    }
+}

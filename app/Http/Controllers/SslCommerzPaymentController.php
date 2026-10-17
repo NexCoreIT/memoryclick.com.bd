@@ -161,6 +161,11 @@ class SslCommerzPaymentController extends Controller
                 'response_data' => json_encode($request->all()),
             ]);
 
+            $frontendUrl = env('FRONTEND_URL');
+            if (!empty($frontendUrl)) {
+                return redirect(rtrim($frontendUrl, '/') . '/payment/success/' . $tran_id);
+            }
+
             return redirect()->route('payment.success.page', ['tran_id' => $tran_id])
                 ->with('success', 'Payment completed successfully!');
         } else {
@@ -168,6 +173,11 @@ class SslCommerzPaymentController extends Controller
                 'status' => 'failed',
                 'response_data' => json_encode($request->all()),
             ]);
+
+            $frontendUrl = env('FRONTEND_URL');
+            if (!empty($frontendUrl)) {
+                return redirect(rtrim($frontendUrl, '/') . '/payment/fail/' . $tran_id);
+            }
 
             return redirect()->route('payment.fail.page', ['tran_id' => $tran_id])
                 ->with('error', 'Payment validation failed!');
@@ -186,6 +196,11 @@ class SslCommerzPaymentController extends Controller
             ]);
         }
 
+        $frontendUrl = env('FRONTEND_URL');
+        if (!empty($frontendUrl)) {
+            return redirect(rtrim($frontendUrl, '/') . '/payment/fail/' . $tran_id);
+        }
+
         return redirect()->route('payment.fail.page', ['tran_id' => $tran_id])
             ->with('error', 'Payment failed! Please try again.');
     }
@@ -200,6 +215,11 @@ class SslCommerzPaymentController extends Controller
                 'status' => 'canceled',
                 'response_data' => json_encode($request->all()),
             ]);
+        }
+
+        $frontendUrl = env('FRONTEND_URL');
+        if (!empty($frontendUrl)) {
+            return redirect(rtrim($frontendUrl, '/') . '/payment/cancel/' . $tran_id);
         }
 
         return redirect()->route('payment.cancel.page', ['tran_id' => $tran_id])
