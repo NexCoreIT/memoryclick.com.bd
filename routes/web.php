@@ -121,6 +121,9 @@ Route::prefix('auth')->group(function () {
     Route::post('/registration/store', [RegistrationController::class, 'store'])->name('registration.store')->middleware(ProtectAgainstSpam::class);
 });
 
+// Helper redirect for admin login
+Route::redirect('/admin/login', '/auth/login');
+
 // ===============================
 // BACKEND ROUTES          //=====
 // ===============================
