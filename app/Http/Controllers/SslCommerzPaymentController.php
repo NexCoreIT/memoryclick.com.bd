@@ -7,6 +7,7 @@ use App\Models\Package;
 use App\Models\HomePageContent;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use Inertia\Inertia;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -261,19 +262,40 @@ class SslCommerzPaymentController extends Controller
 
     public function paymentSuccessPage($tran_id)
     {
-        $order = Order::where('tran_id', $tran_id)->firstOrFail();
-        return view('frontend.package.payment_success', compact('order'));
+        $order = Order::with('package')->where('tran_id', $tran_id)->firstOrFail();
+        return Inertia::render('Payment/Success', [
+            'tran_id' => $tran_id,
+            'order' => [
+                'id' => $order->id,
+                'tran_id' => $order->tran_id,
+                'name' => $order->name,
+                'email' => $order->email,
+                'amount' => $order->amount,
+                'currency' => $order->currency,
+                'status' => $order->status,
+                'package' => $order->package ? [
+                    'id' => $order->package->id,
+                    'package_name' => $order->package->package_name,
+                ] : null,
+            ],
+        ]);
     }
 
     public function paymentFailPage($tran_id)
     {
-        $order = Order::where('tran_id', $tran_id)->firstOrFail();
-        return view('frontend.package.payment_fail', compact('order'));
+        $order = Order::where('tran_id', $tran_id)->first();
+        return Inertia::render('Payment/Fail', [
+            'tran_id' => $tran_id,
+            'order' => $order,
+        ]);
     }
 
     public function paymentCancelPage($tran_id)
     {
-        $order = Order::where('tran_id', $tran_id)->firstOrFail();
-        return view('frontend.package.payment_cancel', compact('order'));
+        $order = Order::where('tran_id', $tran_id)->first();
+        return Inertia::render('Payment/Cancel', [
+            'tran_id' => $tran_id,
+            'order' => $order,
+        ]);
     }
 }

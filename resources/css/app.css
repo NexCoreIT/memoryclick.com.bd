@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css');
+
+@import "./styles/bootstrap.min.css";
+@import "./styles/style.css";
+@import "./styles/responsive.css";
+
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "yet-another-react-lightbox/styles.css";
+
+/* Floating WhatsApp Button */
+.whatsapp-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+}
+
+.whatsapp-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    color: white;
+}
+
+.whatsapp-icon {
+    font-size: 34px;
+}
+
+/* Smooth Swiper & Carousel styling */
+.swiper {
+    width: 100%;
+    padding-bottom: 25px;
+    position: relative;
+}
+
+/* Service, Testimonial, Cinematography Swiper Nav Buttons */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: var(--primary, #EAA636) !important;
+    color: #FFFFFF !important;
+    border: 2px solid var(--primary, #EAA636) !important;
+    box-shadow: 0 4px 14px rgba(234, 166, 54, 0.35) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    top: 42% !important;
+    margin-top: 0 !important;
+    transform: translateY(-50%) !important;
+    z-index: 15 !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+}
+
+.swiper-button-prev {
+    left: 8px !important;
+}
+
+.swiper-button-next {
+    right: 8px !important;
+}
+
+/* Constrain Swiper SVG icon to perfect proportions without stretching */
+.swiper-button-next svg,
+.swiper-button-prev svg,
+.swiper-button-next .swiper-navigation-icon,
+.swiper-button-prev .swiper-navigation-icon {
+    width: 14px !important;
+    height: 14px !important;
+    max-width: 14px !important;
+    max-height: 14px !important;
+    fill: currentColor !important;
+    display: block !important;
+    object-fit: contain !important;
+    transform-origin: center !important;
+}
+
+.swiper-button-prev svg,
+.swiper-button-prev .swiper-navigation-icon {
+    transform: rotate(180deg) !important;
+}
+
+/* Hide fallback pseudo elements when SVG is present */
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    display: none !important;
+}
+
+/* Hover and Active states */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: var(--dark, #1E1916) !important;
+    border-color: var(--dark, #1E1916) !important;
+    color: var(--primary, #EAA636) !important;
+    box-shadow: 0 6px 18px rgba(30, 25, 22, 0.35) !important;
+    transform: translateY(-50%) scale(1.08) !important;
+}
+
+.swiper-button-next:active,
+.swiper-button-prev:active {
+    transform: translateY(-50%) scale(0.95) !important;
+}
+
+.swiper-button-disabled {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 767.98px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 36px !important;
+        height: 36px !important;
+        top: 38% !important;
+    }
+
+    .swiper-button-prev {
+        left: 4px !important;
+    }
+
+    .swiper-button-next {
+        right: 4px !important;
+    }
+
+    .swiper-button-next svg,
+    .swiper-button-prev svg,
+    .swiper-button-next .swiper-navigation-icon,
+    .swiper-button-prev .swiper-navigation-icon {
+        width: 12px !important;
+        height: 12px !important;
+        max-width: 12px !important;
+        max-height: 12px !important;
+    }
+}
+
+/* Category Filter Active Pill */
+.filter-button {
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.filter-button.active {
+    color: var(--primary, #EAA636) !important;
+    font-weight: 700 !important;
+    border-bottom: 2px solid var(--primary, #EAA636) !important;
+}
+
+/* Mobile Offcanvas Drawer */
+.mobile-drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    backdrop-filter: blur(2px);
+    transition: opacity 0.3s ease;
+}
+
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 1060;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-drawer.open {
+    transform: translateX(0);
+}
+
+/* Modal Backdrop */
+.modal-backdrop-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.modal-dialog-custom {
+    background: #ffffff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 750px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 1060;
+}
+
+/* Package description table styles matching original Blade */
+.package-description table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.package-description table,
+.package-description th,
+.package-description td {
+    border: 1px solid #ddd;
+}
+
+.package-description th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    padding: 8px;
+    text-align: left;
+}
+
+.package-description td {
+    padding: 8px;
+}
+
+.package-description tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Blog details styling */
+.blog_details_card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 35px;
+}
+
+.blog_details_badge {
+    display: inline-block;
+    background: var(--primary, #EAA636);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 16px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.blog_details_title {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: var(--dark, #1E1916);
+    font-size: clamp(1.4rem, 4vw, 2.3rem);
+    line-height: 1.35;
+    word-break: break-word;
+}
