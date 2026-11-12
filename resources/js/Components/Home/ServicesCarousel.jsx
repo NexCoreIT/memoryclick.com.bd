@@ -38,12 +38,12 @@ export default function ServicesCarousel({
         >
           {services.map((service) => (
             <SwiperSlide key={service.id}>
-              <div className="testimonial-item bg-white border border-light rounded shadow-sm p-3 text-center h-100 d-flex flex-column">
+              <div className="testimonial-item bg-white border rounded shadow-sm p-3 text-center h-100 d-flex flex-column">
                 <div className="mb-3 overflow-hidden rounded shadow-sm" style={{ height: '220px' }}>
                   <img
                     src={resolveImageUrl(service.image_url || service.image)}
                     className="w-100 h-100 rounded"
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
                     alt={service.title}
                   />
                 </div>
@@ -56,10 +56,10 @@ export default function ServicesCarousel({
                       ? `${service.description.substring(0, 100)}...`
                       : service.description}
                   </p>
-                  <div className="mt-3">
+                  <div className="mt-3 pt-2">
                     <Link
                       href={`/top-service-details/${service.slug}`}
-                      className="btn btn-outline-primary btn-sm px-3 rounded"
+                      className="btn btn-outline-primary btn-sm px-3 rounded shadow-none"
                     >
                       Learn More
                     </Link>

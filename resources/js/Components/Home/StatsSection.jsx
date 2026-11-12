@@ -11,7 +11,7 @@ export default function StatsSection({ stats }) {
           <div className="col-lg-6">
             <div className="row">
               <div className="col-6 mb-3">
-                <div className="count_items bg-light p-3 p-lg-5 rounded text-center h-100 shadow-sm">
+                <div className="count_items bg-light p-3 p-lg-4 rounded text-center h-100 shadow-sm border border-light">
                   <h5 className="text-dark fs-6 mb-2">Since</h5>
                   <h2 className="fs-1 fw-bold text-primary mb-0">
                     {stats.since_year || '2014'}
@@ -19,7 +19,7 @@ export default function StatsSection({ stats }) {
                 </div>
               </div>
               <div className="col-6 mb-3">
-                <div className="count_items bg-light p-3 p-lg-5 rounded text-center h-100 shadow-sm">
+                <div className="count_items bg-light p-3 p-lg-4 rounded text-center h-100 shadow-sm border border-light">
                   <h5 className="text-dark fs-6 mb-2">Events</h5>
                   <h2 className="fs-1 fw-bold text-primary mb-0">
                     <span>{stats.events_count || '3000'}</span> +
@@ -27,7 +27,7 @@ export default function StatsSection({ stats }) {
                 </div>
               </div>
               <div className="col-6 mb-3">
-                <div className="count_items bg-light p-3 p-lg-5 rounded text-center h-100 shadow-sm">
+                <div className="count_items bg-light p-3 p-lg-4 rounded text-center h-100 shadow-sm border border-light">
                   <h5 className="text-dark fs-6 mb-2">Photos</h5>
                   <h2 className="fs-1 fw-bold text-primary mb-0">
                     <span>{stats.photos_count || '1000'}</span> k+
@@ -35,7 +35,7 @@ export default function StatsSection({ stats }) {
                 </div>
               </div>
               <div className="col-6 mb-3">
-                <div className="count_items bg-light p-3 p-lg-5 rounded text-center h-100 shadow-sm">
+                <div className="count_items bg-light p-3 p-lg-4 rounded text-center h-100 shadow-sm border border-light">
                   <h5 className="text-dark fs-6 mb-2">Clients</h5>
                   <h2 className="fs-1 fw-bold text-primary mb-0">
                     <span>{stats.clients_count || '999'}</span> k+

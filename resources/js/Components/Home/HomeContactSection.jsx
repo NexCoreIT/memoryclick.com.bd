@@ -44,13 +44,13 @@ export default function HomeContactSection({ contact }) {
         <div className="row g-4">
           {/* Contact Details & Map */}
           <div className="col-lg-5 order-lg-2">
-            <div className="contact_info bg-white p-4 rounded shadow-sm h-100 d-flex flex-column">
+            <div className="contact_info bg-white p-4 rounded shadow-sm border h-100 d-flex flex-column">
               {contact?.address && (
                 <div className="d-flex mb-4 align-items-center">
                   <div className="me-3 text-primary fs-4">
                     <i className="fas fa-map-marker-alt" />
                   </div>
-                  <div className="text-muted">{contact.address}</div>
+                  <div className="text-muted small">{contact.address}</div>
                 </div>
               )}
 
@@ -62,7 +62,7 @@ export default function HomeContactSection({ contact }) {
                   <div>
                     <a
                       href={`mailto:${contact.email}`}
-                      className="text-decoration-none text-muted"
+                      className="text-decoration-none text-muted small"
                     >
                       {contact.email}
                     </a>
@@ -78,7 +78,7 @@ export default function HomeContactSection({ contact }) {
                   <div>
                     <a
                       href={`tel:${contact.phone}`}
-                      className="text-decoration-none text-muted"
+                      className="text-decoration-none text-muted small"
                     >
                       {contact.phone}
                     </a>
@@ -87,7 +87,7 @@ export default function HomeContactSection({ contact }) {
               )}
 
               {mapSrc && (
-                <div className="mt-auto overflow-hidden rounded shadow-sm" style={{ height: '220px' }}>
+                <div className="mt-auto overflow-hidden rounded border" style={{ height: '240px' }}>
                   <iframe
                     src={mapSrc}
                     width="100%"
@@ -104,18 +104,18 @@ export default function HomeContactSection({ contact }) {
 
           {/* Contact Form */}
           <div className="col-lg-7 order-lg-1">
-            <div className="bg-white p-4 p-md-5 rounded shadow-sm h-100">
-              <h4 className="fw-bold text-dark mb-4">Send a Message</h4>
+            <div className="bg-white p-4 p-md-5 rounded shadow-sm border h-100">
+              <h4 className="fw-bold text-dark mb-4 fs-5">Send a Message</h4>
 
               {(flash?.success || recentlySuccessful) && (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                <div className="alert alert-success alert-dismissible fade show mb-4" role="alert">
                   <i className="fas fa-check-circle me-2" />
                   {flash?.success || 'Your message has been sent successfully!'}
                 </div>
               )}
 
               {flash?.error && (
-                <div className="alert alert-danger" role="alert">
+                <div className="alert alert-danger mb-4" role="alert">
                   <i className="fas fa-exclamation-triangle me-2" />
                   {flash.error}
                 </div>
@@ -195,12 +195,12 @@ export default function HomeContactSection({ contact }) {
                     <button
                       type="submit"
                       disabled={processing}
-                      className="btn btn-primary py-3 px-5 rounded-pill shadow-sm fw-bold"
+                      className="btn btn-primary py-3 px-5 shadow-sm fw-bold w-100"
                     >
                       {processing ? (
                         <>
                           <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" />
-                          Sending...
+                          Sending Message...
                         </>
                       ) : (
                         'Send Message'

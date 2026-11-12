@@ -3,8 +3,8 @@ import AppLayout from '@/Components/Layout/AppLayout';
 import Breadcrumb from '@/Components/UI/Breadcrumb';
 
 export default function TermAndConditions({ page = {} }) {
-  const title = page?.title || 'Terms and Condition';
-  const body = page?.body || "<div class='text-center py-5'><h2>Terms and Condition</h2><p class='mb-0 text-muted'>Content coming soon.</p></div>";
+  const title = page?.title || 'Terms and Conditions';
+  const body = page?.body || "<div class='text-center py-5'><h2>Terms and Conditions</h2><p class='mb-0 text-muted'>Content coming soon.</p></div>";
 
   return (
     <AppLayout

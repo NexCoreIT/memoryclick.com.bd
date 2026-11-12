@@ -78,7 +78,7 @@ export default function BlogDetails({
 
                 {/* Social Share */}
                 <div className="pt-4 border-top d-flex align-items-center justify-content-between flex-wrap gap-3">
-                  <span className="fw-semibold text-dark">Share this article:</span>
+                  <span className="fw-semibold text-dark small">Share this article:</span>
                   <div className="d-flex gap-2">
                     <a
                       href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
@@ -119,8 +119,8 @@ export default function BlogDetails({
             <div className="col-lg-4">
               {/* Categories Widget */}
               {categories && categories.length > 0 && (
-                <div className="card shadow-sm border-0 mb-4 bg-white p-4">
-                  <h5 className="fw-bold mb-3 text-dark border-bottom pb-2">
+                <div className="card shadow-sm border mb-4 bg-white p-4 rounded">
+                  <h5 className="fw-bold mb-3 text-dark border-bottom pb-2 fs-6">
                     Categories
                   </h5>
                   <ul className="list-unstyled mb-0">
@@ -128,7 +128,7 @@ export default function BlogDetails({
                       <li key={cat.id} className="py-2 border-bottom d-flex justify-content-between align-items-center">
                         <Link
                           href={`/blog?category=${cat.slug}`}
-                          className="text-decoration-none text-muted fw-semibold small"
+                          className="text-decoration-none text-muted fw-semibold small blog-title-link"
                         >
                           {cat.name}
                         </Link>
@@ -143,8 +143,8 @@ export default function BlogDetails({
 
               {/* Related Posts Widget */}
               {related_posts && related_posts.length > 0 && (
-                <div className="card shadow-sm border-0 bg-white p-4">
-                  <h5 className="fw-bold mb-3 text-dark border-bottom pb-2">
+                <div className="card shadow-sm border bg-white p-4 rounded">
+                  <h5 className="fw-bold mb-3 text-dark border-bottom pb-2 fs-6">
                     Recent Stories
                   </h5>
                   <div className="d-flex flex-column gap-3">
@@ -165,7 +165,7 @@ export default function BlogDetails({
                           <h6 className="mb-1 small fw-bold">
                             <Link
                               href={`/blog/${rp.slug}`}
-                              className="text-dark text-decoration-none"
+                              className="text-dark text-decoration-none blog-title-link"
                             >
                               {rp.title.length > 45
                                 ? `${rp.title.substring(0, 45)}...`

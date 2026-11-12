@@ -38,6 +38,18 @@ export default function BlogIndex({
     );
   };
 
+  const handlePageClick = (page) => {
+    router.get(
+      '/blog',
+      {
+        page,
+        category: selected_category || undefined,
+        search: searchTerm.trim() || undefined,
+      },
+      { preserveState: true }
+    );
+  };
+
   return (
     <AppLayout
       title="Blog & Stories | Memory Click"
@@ -45,7 +57,7 @@ export default function BlogIndex({
     >
       <Breadcrumb title="Blog & Stories" />
 
-      <div className="blog_sec section_gap py-5">
+      <div className="blog_sec section_gap py-5 bg-white">
         <div className="container">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: '600px' }}>
             <p className="text-primary text-uppercase sub_title mb-2 fw-bold" style={{ letterSpacing: '1px' }}>
@@ -62,8 +74,8 @@ export default function BlogIndex({
               <button
                 type="button"
                 onClick={() => handleCategoryClick('all')}
-                className={`btn btn-default shadow-none border-0 bg-transparent filter-button px-3 py-2 ${
-                  !selected_category || selected_category === 'all' ? 'active' : 'text-muted'
+                className={`filter-button ${
+                  !selected_category || selected_category === 'all' ? 'active' : ''
                 }`}
               >
                 All
@@ -73,8 +85,8 @@ export default function BlogIndex({
                   key={cat.id}
                   type="button"
                   onClick={() => handleCategoryClick(cat.slug)}
-                  className={`btn btn-default shadow-none border-0 bg-transparent filter-button px-3 py-2 ${
-                    selected_category === cat.slug ? 'active' : 'text-muted'
+                  className={`filter-button ${
+                    selected_category === cat.slug ? 'active' : ''
                   }`}
                 >
                   {cat.name} ({cat.posts_count ?? 0})
@@ -88,7 +100,7 @@ export default function BlogIndex({
                   <input
                     type="text"
                     name="search"
-                    className="form-control shadow-none rounded-start border"
+                    className="form-control"
                     placeholder="Search articles..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -116,10 +128,13 @@ export default function BlogIndex({
             ) : (
               posts.map((post) => (
                 <div key={post.id} className="col-12 col-sm-6 col-lg-4">
-                  <div className="blog_card h-100 bg-white border rounded shadow-sm d-flex flex-column">
-                    <div className="blog_card_img_wrap position-relative" style={{ height: '220px', overflow: 'hidden' }}>
+                  <div className="card h-100 bg-white border rounded shadow-sm d-flex flex-column blog-card-item">
+                    <div className="position-relative overflow-hidden rounded-top" style={{ height: '220px' }}>
                       {post.category && (
-                        <span className="blog_badge position-absolute top-0 start-0 m-2 px-2 py-1 bg-primary text-white rounded small fw-bold" style={{ zIndex: 2 }}>
+                        <span
+                          className="position-absolute top-0 start-0 m-2 px-2 py-1 bg-primary text-white rounded small fw-bold"
+                          style={{ zIndex: 2, fontSize: '11px', letterSpacing: '0.5px' }}
+                        >
                           {post.category.name}
                         </span>
                       )}
@@ -128,13 +143,13 @@ export default function BlogIndex({
                         <img
                           src={resolveImageUrl(post.image_url || post.image)}
                           alt={post.title}
-                          className="w-100 h-100"
-                          style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
+                          className="w-100 h-100 card-img-top blog-img"
+                          style={{ objectFit: 'cover' }}
                         />
                       </Link>
                     </div>
 
-                    <div className="blog_card_body p-4 d-flex flex-column flex-grow-1">
+                    <div className="card-body p-4 d-flex flex-column flex-grow-1">
                       <div className="blog_meta d-flex gap-3 text-muted small mb-2">
                         <span>
                           <i className="far fa-user text-primary me-1" />
@@ -181,6 +196,54 @@ export default function BlogIndex({
               ))
             )}
           </div>
+
+          {/* Pagination */}
+          {pagination && pagination.last_page > 1 && (
+            <div className="d-flex justify-content-center mt-5 pt-3">
+              <nav aria-label="Blog pagination">
+                <ul className="pagination gap-1 mb-0">
+                  <li className={`page-item ${pagination.current_page === 1 ? 'disabled' : ''}`}>
+                    <button
+                      type="button"
+                      className="page-link shadow-none"
+                      onClick={() => handlePageClick(pagination.current_page - 1)}
+                      disabled={pagination.current_page === 1}
+                    >
+                      &laquo; Previous
+                    </button>
+                  </li>
+                  {Array.from({ length: pagination.last_page }, (_, i) => i + 1).map((pg) => (
+                    <li
+                      key={pg}
+                      className={`page-item ${pagination.current_page === pg ? 'active' : ''}`}
+                    >
+                      <button
+                        type="button"
+                        className="page-link shadow-none"
+                        onClick={() => handlePageClick(pg)}
+                      >
+                        {pg}
+                      </button>
+                    </li>
+                  ))}
+                  <li
+                    className={`page-item ${
+                      pagination.current_page === pagination.last_page ? 'disabled' : ''
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      className="page-link shadow-none"
+                      onClick={() => handlePageClick(pagination.current_page + 1)}
+                      disabled={pagination.current_page === pagination.last_page}
+                    >
+                      Next &raquo;
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          )}
         </div>
       </div>
     </AppLayout>

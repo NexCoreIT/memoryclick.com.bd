@@ -43,11 +43,11 @@ export default function PhotographyDetails({
       />
 
       {/* Hero Section */}
-      <div className="hero-header pb-4">
+      <div className="hero-header pb-4 bg-white border-bottom">
         <div className="container py-4">
           <div className="row justify-content-center">
             <div className="col-lg-10 text-center">
-              <div className="mb-4 overflow-hidden rounded shadow-sm" style={{ maxHeight: '550px' }}>
+              <div className="mb-4 overflow-hidden rounded shadow-sm" style={{ maxHeight: '520px' }}>
                 <img
                   src={heroImage}
                   className="img-fluid rounded w-100"
@@ -56,12 +56,12 @@ export default function PhotographyDetails({
                 />
               </div>
 
-              <h1 className="display-5 my-4 fw-bold text-dark">{title}</h1>
+              <h1 className="display-5 my-3 fw-bold text-dark">{title}</h1>
               {client_name && (
                 <p className="text-primary fw-bold mb-1 fs-5">{client_name}</p>
               )}
               {category?.name && (
-                <p className="mb-1 text-muted">{category.name}</p>
+                <p className="mb-1 text-muted small">{category.name}</p>
               )}
               {package_name && (
                 <p className="mb-0 text-muted small">
@@ -84,27 +84,30 @@ export default function PhotographyDetails({
           </div>
 
           {gallery_images.length === 0 ? (
-            <div className="text-center py-4">
-              <p className="text-muted fw-semibold">No additional gallery photos found for this shoot.</p>
+            <div className="text-center py-5">
+              <div className="bg-white p-4 rounded shadow-sm border mx-auto" style={{ maxWidth: '500px' }}>
+                <p className="text-muted fw-semibold mb-0">No additional gallery photos found for this shoot.</p>
+              </div>
             </div>
           ) : (
             <div className="row gy-4">
               {gallery_images.map((img, idx) => (
                 <div key={idx} className="col-lg-4 col-md-6 col-sm-6">
                   <div
-                    className="position-relative overflow-hidden rounded shadow-sm mb-2"
+                    className="position-relative overflow-hidden rounded shadow-sm mb-2 bg-white p-2 border"
                     style={{ height: '280px', cursor: 'pointer' }}
                     onClick={() => openLightboxAt(idx)}
                   >
                     <img
                       src={resolveImageUrl(img.url || img.path)}
                       className="w-100 h-100 rounded"
-                      alt={`Photo ${idx + 1}`}
+                      alt={`${title} - ${idx + 1}`}
                       style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
                     />
                     <div
-                      className="position-absolute top-0 end-0 p-2 m-2 bg-dark bg-opacity-50 text-white rounded-circle d-flex align-items-center justify-content-center"
-                      style={{ width: '32px', height: '32px' }}
+                      className="position-absolute top-0 end-0 p-2 m-3 bg-dark bg-opacity-50 text-white rounded-circle d-flex align-items-center justify-content-center"
+                      style={{ width: '34px', height: '34px' }}
+                      title="Click to view full photo"
                     >
                       <i className="fas fa-search-plus small" />
                     </div>
@@ -116,14 +119,12 @@ export default function PhotographyDetails({
         </div>
       </div>
 
-      {lightboxOpen && (
-        <Lightbox
-          open={lightboxOpen}
-          close={() => setLightboxOpen(false)}
-          index={lightboxIndex}
-          slides={slides}
-        />
-      )}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={slides}
+      />
     </AppLayout>
   );
 }

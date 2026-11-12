@@ -27,9 +27,9 @@ export default function LatestPackagesSection({
           <div className="row gy-4 justify-content-center">
             {packages.map((pkg) => (
               <div key={pkg.id} className="col-md-6 col-lg-4">
-                <div className="package_list text-center h-100 border p-3 rounded shadow-sm d-flex flex-column justify-content-between">
+                <div className="package_list text-center h-100 border p-3 rounded shadow-sm d-flex flex-column justify-content-between bg-white">
                   <div>
-                    <div className="mb-3 overflow-hidden rounded" style={{ height: '200px' }}>
+                    <div className="mb-3 overflow-hidden rounded" style={{ height: '210px' }}>
                       <img
                         src={resolveImageUrl(pkg.image_url || pkg.image)}
                         className="w-100 h-100 rounded"
@@ -37,7 +37,7 @@ export default function LatestPackagesSection({
                         alt={pkg.package_name}
                       />
                     </div>
-                    <h4 className="fw-bold text-dark mb-2">{pkg.package_name}</h4>
+                    <h4 className="fw-bold text-dark mb-2 fs-5">{pkg.package_name}</h4>
                     {pkg.team && (
                       <p className="m-0 text-muted small">{pkg.team}</p>
                     )}

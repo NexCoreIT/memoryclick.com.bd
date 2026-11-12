@@ -9,17 +9,17 @@ export default function HeroSlider({ sliders }) {
   }
 
   return (
-    <div className="hero-header position-relative">
+    <div className="hero-header position-relative overflow-hidden">
       <Swiper
         modules={[Autoplay, Navigation]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={sliders.length > 1}
-        navigation
+        navigation={sliders.length > 1}
         className="w-100"
       >
         {sliders.map((slider, index) => (
           <SwiperSlide key={slider.id || index}>
-            <div className="position-relative w-100" style={{ minHeight: '280px' }}>
+            <div className="position-relative w-100" style={{ minHeight: '240px' }}>
               <img
                 src={resolveImageUrl(slider.image_url || slider.image)}
                 alt={slider.title || 'Memory Click Slider'}

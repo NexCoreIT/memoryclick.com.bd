@@ -12,7 +12,7 @@ export default function ServicesIndex({ services = [] }) {
     >
       <Breadcrumb title="All Services" />
 
-      <div className="service_sec section_gap py-5">
+      <div className="service_sec section_gap py-5 bg-white">
         <div className="container">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: '600px' }}>
             <p className="text-primary text-uppercase sub_title mb-2 fw-bold" style={{ letterSpacing: '1px' }}>
@@ -24,13 +24,13 @@ export default function ServicesIndex({ services = [] }) {
           <div className="row g-4">
             {services.map((service) => (
               <div key={service.id} className="col-sm-6 col-lg-4">
-                <div className="bg-white border border-light h-100 rounded shadow-sm p-4 text-center d-flex flex-column justify-content-between">
+                <div className="bg-white border rounded shadow-sm p-4 text-center d-flex flex-column justify-content-between h-100">
                   <div>
                     <div className="mb-3 overflow-hidden rounded shadow-sm" style={{ height: '220px' }}>
                       <img
                         src={resolveImageUrl(service.image_url || service.image)}
                         className="w-100 h-100 rounded"
-                        style={{ objectFit: 'cover' }}
+                        style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
                         alt={service.title}
                       />
                     </div>
@@ -46,7 +46,7 @@ export default function ServicesIndex({ services = [] }) {
 
                   <div className="mt-4">
                     <Link
-                      className="d-inline-block bg-primary py-2 px-4 text-white rounded text-decoration-none fw-semibold shadow-sm"
+                      className="btn btn-primary py-2 px-4 shadow-sm"
                       href={`/top-service-details/${service.slug}`}
                     >
                       Read More

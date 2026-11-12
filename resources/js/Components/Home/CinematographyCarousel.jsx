@@ -2,8 +2,12 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
-function getEmbedUrl(rawUrl) {
+export function getEmbedUrl(rawUrl) {
   if (!rawUrl) return '';
+
+  if (rawUrl.includes('youtube.com/embed/')) {
+    return rawUrl;
+  }
 
   if (rawUrl.includes('youtube.com/watch?v=')) {
     const videoId = rawUrl.split('watch?v=')[1]?.split('&')[0];
@@ -13,6 +17,10 @@ function getEmbedUrl(rawUrl) {
   if (rawUrl.includes('youtu.be/')) {
     const videoId = rawUrl.split('youtu.be/')[1]?.split('?')[0];
     return `https://www.youtube.com/embed/${videoId}`;
+  }
+
+  if (rawUrl.includes('facebook.com/plugins/video.php')) {
+    return rawUrl;
   }
 
   return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
@@ -63,6 +71,7 @@ export default function CinematographyCarousel({
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowFullScreen
+                    loading="lazy"
                   />
                 </div>
                 <div className="flex-grow-1 d-flex flex-column justify-content-between">

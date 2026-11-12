@@ -25,19 +25,28 @@ export default function HomeBlogSection({ blogs }) {
         <div className="row g-4">
           {blogs.map((blog) => (
             <div key={blog.id} className="col-md-6 col-lg-4">
-              <div className="card h-100 border rounded-3 shadow-sm bg-white blog-card-item d-flex flex-column">
-                <Link
-                  href={`/blog/${blog.slug}`}
-                  className="d-block overflow-hidden rounded-top-3"
-                  style={{ height: '220px' }}
-                >
-                  <img
-                    src={resolveImageUrl(blog.image_url || blog.image)}
-                    className="card-img-top w-100 h-100 blog-img"
-                    style={{ objectFit: 'cover' }}
-                    alt={blog.title}
-                  />
-                </Link>
+              <div className="card h-100 border rounded shadow-sm bg-white blog-card-item d-flex flex-column">
+                <div className="position-relative overflow-hidden rounded-top" style={{ height: '220px' }}>
+                  {blog.category && (
+                    <span
+                      className="position-absolute top-0 start-0 m-2 px-2 py-1 bg-primary text-white rounded small fw-bold"
+                      style={{ zIndex: 2, fontSize: '11px', letterSpacing: '0.5px' }}
+                    >
+                      {blog.category.name}
+                    </span>
+                  )}
+                  <Link
+                    href={`/blog/${blog.slug}`}
+                    className="d-block w-100 h-100"
+                  >
+                    <img
+                      src={resolveImageUrl(blog.image_url || blog.image)}
+                      className="card-img-top w-100 h-100 blog-img"
+                      style={{ objectFit: 'cover' }}
+                      alt={blog.title}
+                    />
+                  </Link>
+                </div>
 
                 <div className="card-body p-4 d-flex flex-column flex-grow-1">
                   <h5 className="card-title fw-bold mb-2 fs-6">

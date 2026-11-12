@@ -73,7 +73,7 @@ export default function TestimonialsCarousel({
                       <i
                         key={star}
                         className={`fa fa-star small me-1 ${
-                          star <= item.rating ? 'text-primary' : 'text-light'
+                          star <= item.rating ? 'text-primary' : 'text-muted opacity-25'
                         }`}
                       />
                     ))}
@@ -85,7 +85,7 @@ export default function TestimonialsCarousel({
                       {isLong && (
                         <button
                           type="button"
-                          className="btn btn-link p-0 text-primary fw-bold text-decoration-none small align-baseline"
+                          className="btn btn-link p-0 text-primary fw-bold text-decoration-none small align-baseline shadow-none"
                           onClick={() => toggleExpand(item.id)}
                         >
                           {isExpanded ? 'Show less' : 'Learn more'}

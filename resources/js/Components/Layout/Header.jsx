@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { resolveImageUrl } from '@/Utils/image';
 
@@ -9,6 +9,24 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [portfolioOpen, setPortfolioOpen] = useState(false);
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
+
+  // Close menus on page navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setPortfolioOpen(false);
+  }, [url]);
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   const logoSrc = settings?.logo_url ? resolveImageUrl(settings.logo_url) : '/fav.png';
 
@@ -27,7 +45,7 @@ export default function Header() {
       {/* Navbar Start */}
       <nav className="navbar navbar-expand-lg bg-white border-bottom navbar-light sticky-top px-4 px-lg-5">
         <div className="container d-flex align-items-center justify-content-between">
-          <Link href="/" className="navbar-brand py-0">
+          <Link href="/" className="navbar-brand py-0 d-flex align-items-center">
             <img
               src={logoSrc}
               alt="MemoryClick Logo"
@@ -90,12 +108,12 @@ export default function Header() {
                   }}
                   className={`nav-link dropdown-toggle ${isPortfolio ? 'active' : ''}`}
                   role="button"
+                  aria-expanded={portfolioOpen}
                 >
                   Portfolio
                 </a>
                 <div
-                  className={`dropdown-menu m-0 shadow-sm border-0 rounded-bottom ${portfolioOpen ? 'show' : ''}`}
-                  style={{ display: portfolioOpen ? 'block' : 'none' }}
+                  className={`dropdown-menu m-0 shadow-sm border-0 ${portfolioOpen ? 'show' : ''}`}
                 >
                   <Link
                     href="/photography"
@@ -130,7 +148,7 @@ export default function Header() {
                 href="/contact-us"
                 className={`nav-item nav-link ${isContact ? 'active' : ''}`}
               >
-                Contact
+                Contact Us
               </Link>
 
               <Link
@@ -143,7 +161,7 @@ export default function Header() {
 
             {/* Book Now Button */}
             <div className="d-none d-lg-block ms-4">
-              <Link href="/package" className="btn btn-primary rounded-pill px-4 py-2">
+              <Link href="/package" className="btn btn-primary rounded-pill px-4 py-2 shadow-sm">
                 Book Now
               </Link>
             </div>
@@ -161,12 +179,12 @@ export default function Header() {
 
       {/* Mobile Drawer Menu */}
       <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
-        <div className="p-4 border-bottom d-flex align-items-center justify-content-between">
+        <div className="p-3 border-bottom d-flex align-items-center justify-content-between bg-light">
           <Link href="/" onClick={() => setMobileMenuOpen(false)}>
             <img
               src={logoSrc}
               alt="MemoryClick Logo"
-              style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+              style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
             />
           </Link>
           <button
@@ -177,11 +195,11 @@ export default function Header() {
           />
         </div>
 
-        <div className="p-4 d-flex flex-column gap-2">
+        <div className="d-flex flex-column py-2">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isHome ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isHome ? 'active text-primary fw-bold' : ''}`}
           >
             Home
           </Link>
@@ -189,22 +207,22 @@ export default function Header() {
           <Link
             href="/about"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isAbout ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isAbout ? 'active text-primary fw-bold' : ''}`}
           >
             About Us
           </Link>
 
           <div>
             <div
-              className={`d-flex align-items-center justify-content-between py-2 fs-5 cursor-pointer ${isPortfolio ? 'text-primary fw-bold' : 'text-dark'}`}
+              className={`nav-link d-flex align-items-center justify-content-between ${isPortfolio ? 'active text-primary fw-bold' : ''}`}
               onClick={() => setMobilePortfolioOpen(!mobilePortfolioOpen)}
               style={{ cursor: 'pointer' }}
             >
               <span>Portfolio</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -213,7 +231,7 @@ export default function Header() {
                 strokeLinejoin="round"
                 style={{
                   transform: mobilePortfolioOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.2s',
+                  transition: 'transform 0.2s ease',
                 }}
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -221,20 +239,22 @@ export default function Header() {
             </div>
 
             {mobilePortfolioOpen && (
-              <div className="ps-3 border-start ms-2 d-flex flex-column gap-2 my-2">
+              <div className="bg-light ps-3 border-bottom">
                 <Link
                   href="/photography"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`nav-link py-1 ${isPhotography ? 'text-primary fw-bold' : 'text-muted'}`}
+                  className={`nav-link py-2 ps-3 border-0 ${isPhotography ? 'active text-primary fw-bold' : ''}`}
+                  style={{ fontSize: '14px' }}
                 >
-                  Photography
+                  <i className="fas fa-camera me-2 text-primary"></i> Photography
                 </Link>
                 <Link
                   href="/cinematography"
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`nav-link py-1 ${isCinematography ? 'text-primary fw-bold' : 'text-muted'}`}
+                  className={`nav-link py-2 ps-3 border-0 ${isCinematography ? 'active text-primary fw-bold' : ''}`}
+                  style={{ fontSize: '14px' }}
                 >
-                  Cinematography
+                  <i className="fas fa-video me-2 text-primary"></i> Cinematography
                 </Link>
               </div>
             )}
@@ -243,7 +263,7 @@ export default function Header() {
           <Link
             href="/package"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isPackage ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isPackage ? 'active text-primary fw-bold' : ''}`}
           >
             Packages
           </Link>
@@ -251,7 +271,7 @@ export default function Header() {
           <Link
             href="/blog"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isBlog ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isBlog ? 'active text-primary fw-bold' : ''}`}
           >
             Blog
           </Link>
@@ -259,24 +279,24 @@ export default function Header() {
           <Link
             href="/contact-us"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isContact ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isContact ? 'active text-primary fw-bold' : ''}`}
           >
-            Contact
+            Contact Us
           </Link>
 
           <Link
             href="/term-and-condition"
             onClick={() => setMobileMenuOpen(false)}
-            className={`nav-link py-2 fs-5 ${isTerm ? 'text-primary fw-bold' : 'text-dark'}`}
+            className={`nav-link ${isTerm ? 'active text-primary fw-bold' : ''}`}
           >
-            Terms
+            Terms & Conditions
           </Link>
 
-          <div className="mt-4 pt-3 border-top">
+          <div className="p-3 mt-3">
             <Link
               href="/package"
               onClick={() => setMobileMenuOpen(false)}
-              className="btn btn-primary rounded-pill w-100 py-3 fw-bold"
+              className="btn btn-primary rounded-pill w-100 py-2 fw-bold shadow-sm"
             >
               Book Now
             </Link>

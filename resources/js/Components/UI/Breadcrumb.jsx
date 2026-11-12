@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Breadcrumb({ title, items }) {
   return (
-    <div className="breadcrumb_sec bg-light py-4 mb-4">
+    <div className="breadcrumb_sec bg-light py-4 border-bottom">
       <div className="container">
         <h4 className="fw-bold text-dark mb-1">{title}</h4>
         <nav aria-label="breadcrumb">

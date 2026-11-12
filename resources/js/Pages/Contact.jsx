@@ -7,7 +7,7 @@ export default function Contact({ contact = {} }) {
   return (
     <AppLayout
       title="Contact Us | Memory Click"
-      metaDescription="Get in touch with Memory Click studio for wedding and event photography bookings."
+      metaDescription="Get in touch with Memory Click studio for wedding and event photography bookings in Bangladesh."
     >
       <Breadcrumb title="Contact Us" />
       <HomeContactSection contact={contact} />

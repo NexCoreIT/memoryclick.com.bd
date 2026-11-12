@@ -27,13 +27,13 @@ export default function Checkout({ packageItem }) {
       <AppLayout title="Checkout | Memory Click">
         <Breadcrumb title="Checkout" />
         <div className="container py-5 text-center my-5">
-          <div className="bg-light p-5 rounded shadow-sm border mx-auto" style={{ maxWidth: '500px' }}>
+          <div className="bg-white p-5 rounded shadow-sm border mx-auto" style={{ maxWidth: '500px' }}>
             <i className="fas fa-shopping-cart fa-3x text-primary mb-3" />
-            <h4 className="fw-bold mb-2">No Package Selected</h4>
+            <h4 className="fw-bold mb-2 text-dark">No Package Selected</h4>
             <p className="text-muted small mb-4">
               Please choose a photography or cinematography package to proceed to checkout.
             </p>
-            <Link href="/package" className="btn btn-primary px-4 py-2">
+            <Link href="/package" className="btn btn-primary px-4 py-2 shadow-sm">
               Browse Packages
             </Link>
           </div>
@@ -82,15 +82,15 @@ export default function Checkout({ packageItem }) {
         ]}
       />
 
-      <div className="checkout_sec section_gap py-5">
+      <div className="checkout_sec section_gap py-5 bg-light">
         <div className="container">
           <form onSubmit={handleSubmit}>
             <div className="row g-4">
               {/* Billing Details */}
               <div className="col-lg-7">
-                <div className="card shadow-sm border-0 bg-white">
+                <div className="card shadow-sm border rounded-3 bg-white">
                   <div className="card-body p-4 p-md-5">
-                    <h4 className="fw-bold mb-4 text-dark border-bottom pb-3">
+                    <h4 className="fw-bold mb-4 text-dark border-bottom pb-3 fs-5">
                       Billing Details
                     </h4>
 
@@ -108,7 +108,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="text"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="Your full name"
                           value={formData.name}
                           onChange={(e) =>
@@ -124,7 +124,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="email"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="Your email address"
                           value={formData.email}
                           onChange={(e) =>
@@ -140,7 +140,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="tel"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="Your phone number"
                           value={formData.phone}
                           onChange={(e) =>
@@ -155,7 +155,7 @@ export default function Checkout({ packageItem }) {
                           Country <span className="text-danger">*</span>
                         </label>
                         <select
-                          className="form-select shadow-none py-2"
+                          className="form-select"
                           value={formData.country}
                           onChange={(e) =>
                             setFormData({ ...formData, country: e.target.value })
@@ -172,7 +172,7 @@ export default function Checkout({ packageItem }) {
                           Full Address <span className="text-danger">*</span>
                         </label>
                         <textarea
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           rows={2}
                           placeholder="Street address, apartment, suite, etc."
                           value={formData.address}
@@ -189,7 +189,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="text"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="City"
                           value={formData.city}
                           onChange={(e) =>
@@ -205,7 +205,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="text"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="State or District"
                           value={formData.state}
                           onChange={(e) =>
@@ -220,7 +220,7 @@ export default function Checkout({ packageItem }) {
                         </label>
                         <input
                           type="text"
-                          className="form-control shadow-none py-2"
+                          className="form-control"
                           placeholder="Postal Code"
                           value={formData.postcode}
                           onChange={(e) =>
@@ -235,9 +235,9 @@ export default function Checkout({ packageItem }) {
 
               {/* Order Summary */}
               <div className="col-lg-5">
-                <div className="card shadow-sm border-0 bg-white mb-4">
+                <div className="card shadow-sm border rounded-3 bg-white mb-4">
                   <div className="card-body p-4 p-md-5">
-                    <h4 className="fw-bold mb-4 text-dark border-bottom pb-3">
+                    <h4 className="fw-bold mb-4 text-dark border-bottom pb-3 fs-5">
                       Order Summary
                     </h4>
 
@@ -256,7 +256,7 @@ export default function Checkout({ packageItem }) {
                     </div>
 
                     <div className="d-flex justify-content-between mb-2">
-                      <span className="text-muted">Package Price</span>
+                      <span className="text-muted small">Package Price</span>
                       <span className="fw-semibold text-dark">
                         TK. {Number(packageItem.price).toLocaleString()}
                       </span>
@@ -321,9 +321,9 @@ export default function Checkout({ packageItem }) {
 
                 {/* Package Features List */}
                 {packageItem.features && packageItem.features.length > 0 && (
-                  <div className="card shadow-sm border-0 bg-white">
+                  <div className="card shadow-sm border rounded-3 bg-white">
                     <div className="card-body p-4">
-                      <h6 className="fw-bold mb-3 text-dark">Package Features:</h6>
+                      <h6 className="fw-bold mb-3 text-dark fs-6">Package Features:</h6>
                       <ul className="list-unstyled mb-0 small">
                         {packageItem.features.map((feature, idx) => (
                           <li key={feature.id || idx} className="mb-2 d-flex align-items-start">

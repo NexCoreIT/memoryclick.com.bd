@@ -12,7 +12,7 @@ export default function PackageIndex({ divisions = [] }) {
     >
       <Breadcrumb title="Packages" />
 
-      <div className="section_gap py-5">
+      <div className="section_gap py-5 bg-white">
         <div className="container">
           <div className="text-center mx-auto mb-5" style={{ maxWidth: '600px' }}>
             <p className="text-primary text-uppercase sub_title mb-2 fw-bold" style={{ letterSpacing: '1px' }}>
@@ -30,15 +30,15 @@ export default function PackageIndex({ divisions = [] }) {
                 {divisions.map((division) => (
                   <div key={division.id} className="col-md-6">
                     <div className="package_wrap h-100 text-center position-relative overflow-hidden border rounded shadow-sm bg-white p-3">
-                      <div className="overflow-hidden rounded-top mb-3" style={{ height: '220px' }}>
+                      <div className="overflow-hidden rounded-top mb-3" style={{ height: '230px' }}>
                         <img
                           src={resolveImageUrl(division.image_url || division.image)}
                           className="w-100 h-100 rounded-top"
                           alt={division.name}
-                          style={{ objectFit: 'cover' }}
+                          style={{ objectFit: 'cover', transition: 'transform 0.4s ease' }}
                         />
                       </div>
-                      <h4 className="fw-bold mb-2">
+                      <h4 className="fw-bold mb-2 fs-5">
                         <Link
                           href={`/division/${division.slug}/package`}
                           className="stretched-link text-decoration-none text-dark"

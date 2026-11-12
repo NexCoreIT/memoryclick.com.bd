@@ -34,10 +34,10 @@ export default function About({
                 <img
                   src={resolveImageUrl(ceo_image_url)}
                   className="img-fluid rounded shadow"
-                  alt={ceo_name}
+                  alt={ceo_name || 'Founder & CEO'}
                   style={{
                     width: '100%',
-                    maxHeight: '550px',
+                    maxHeight: '520px',
                     objectFit: 'cover',
                     objectPosition: 'top',
                   }}
@@ -59,9 +59,9 @@ export default function About({
                 </h2>
                 <div
                   className="mb-4 text-muted"
-                  style={{ lineHeight: '1.8', fontSize: '1.05rem', whiteSpace: 'pre-line' }}
+                  style={{ lineHeight: '1.85', fontSize: '1.05rem', whiteSpace: 'pre-line' }}
                 >
-                  {ceo_body}
+                  {ceo_body || 'Memory Click started with a vision to capture life\'s most beautiful moments. We have grown into a trusted name in wedding photography and cinematography across Bangladesh.'}
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function About({
       </div>
 
       {/* About Memoryclick Story Section */}
-      <div className="about_memoryclick section_gap bg-light py-5">
+      <div className="about_memoryclick section_gap bg-light py-5 border-top border-bottom">
         <div className="container py-lg-4">
           <div className="text-center mx-auto mb-5 pb-3" style={{ maxWidth: '600px' }}>
             <h2 className="display-6 fw-bold text-dark mb-3">
@@ -89,7 +89,7 @@ export default function About({
                   alt="Memoryclick Story"
                   style={{
                     width: '100%',
-                    maxHeight: '550px',
+                    maxHeight: '520px',
                     objectFit: 'cover',
                   }}
                 />
@@ -108,9 +108,9 @@ export default function About({
                 <h2 className="mb-4 fw-bold text-dark">Memoryclick Story</h2>
                 <div
                   className="mb-4 text-muted"
-                  style={{ lineHeight: '1.8', fontSize: '1.05rem', whiteSpace: 'pre-line' }}
+                  style={{ lineHeight: '1.85', fontSize: '1.05rem', whiteSpace: 'pre-line' }}
                 >
-                  {about_memoryclick}
+                  {about_memoryclick || 'Every wedding tells a unique story of love, emotion, and celebration. Our team of experienced photographers and cinematographers specialize in capturing candid, intimate, and unforgettable moments.'}
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@ export default function About({
             <div className="row g-4">
               {teams.map((team) => (
                 <div key={team.id} className="col-sm-6 col-xl-3">
-                  <div className="team-membem shadow-sm bg-light p-3 p-lg-4 rounded text-center h-100">
+                  <div className="team-membem shadow-sm bg-light p-3 p-lg-4 rounded text-center h-100 border border-light">
                     <img
                       src={resolveImageUrl(team.image_url || team.image)}
                       className="img-fluid rounded mb-3"
@@ -147,7 +147,7 @@ export default function About({
                         objectPosition: 'top',
                       }}
                     />
-                    <h5 className="fw-bold text-dark mb-1">{team.name}</h5>
+                    <h5 className="fw-bold text-dark mb-1 fs-6">{team.name}</h5>
                     <p className="m-0 text-muted small">{team.designation}</p>
                   </div>
                 </div>
